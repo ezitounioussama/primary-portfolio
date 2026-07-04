@@ -2,6 +2,7 @@ import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import FloatingDock from "@/components/nav/floating-dock";
 import SmoothScroll from "@/components/smooth-scroll";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { PROFILE, SITE_URL } from "@/lib/data";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,10 +22,81 @@ const instrumentSerif = Instrument_Serif({
     subsets: ["latin"],
 });
 
+const TITLE = `${PROFILE.name} — ${PROFILE.role}`;
+const DESCRIPTION = PROFILE.summary;
+
 export const metadata = {
-    title: "Oussama Ezitouni — Fullstack Engineer",
-    description:
-        "Fullstack engineer building fast, expressive web experiences with Next.js and GSAP.",
+    metadataBase: new URL(SITE_URL),
+    title: {
+        default: TITLE,
+        template: `%s — ${PROFILE.name}`,
+    },
+    description: DESCRIPTION,
+    applicationName: `${PROFILE.name} — Portfolio`,
+    authors: [{ name: PROFILE.name, url: SITE_URL }],
+    creator: PROFILE.name,
+    publisher: PROFILE.name,
+    category: "technology",
+    keywords: [
+        "Oussama Ezitouni",
+        "Senior Full-Stack Engineer",
+        "Full-Stack Developer Morocco",
+        "React developer",
+        "Next.js developer",
+        "Node.js",
+        "NestJS",
+        "PHP",
+        "Symfony",
+        "Laravel",
+        "DevOps engineer",
+        "Docker",
+        "Kubernetes",
+        "GSAP",
+        "Rabat",
+        "Kenitra",
+        "GoToDev",
+    ],
+    alternates: {
+        canonical: "/",
+    },
+    openGraph: {
+        type: "website",
+        url: SITE_URL,
+        siteName: PROFILE.name,
+        title: TITLE,
+        description: DESCRIPTION,
+        locale: "en_US",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: TITLE,
+        description: DESCRIPTION,
+        creator: "@ezitounioussama",
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+        },
+    },
+    icons: {
+        icon: "/favicon.ico",
+        shortcut: "/favicon.ico",
+        apple: "/favicon.ico",
+    },
+};
+
+export const viewport = {
+    themeColor: [
+        { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+        { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    ],
+    colorScheme: "dark light",
 };
 
 // Runs before paint: applies the saved theme (or system preference) by toggling

@@ -1,0 +1,62 @@
+# Oussama Ezitouni — Senior Full-Stack Engineer
+
+> Portfolio of Oussama Ezitouni, a Morocco-based (Kenitra / Rabat) senior
+> full-stack software engineer, DevOps architect, and technical lead with 3+
+> years building scalable web applications. Dual expertise across the JavaScript
+> (React, Next.js, Node.js, NestJS) and PHP (Symfony, Laravel) ecosystems.
+> Co-founder of the GoToDev software agency.
+
+Contact: ezitounioussama@gmail.com
+Location: Kenitra / Rabat, Morocco
+Languages: Arabic (native), English (C1), French (B2)
+
+## About
+
+Results-driven senior full-stack engineer who owns the full SDLC — from
+requirements and system design to production deployment and performance
+optimization. Started in the backend and moved into creating fast, expressive
+frontend and 3D web experiences. Leads technical teams, mentors engineers, and
+drives DevOps transformation.
+
+## Experience
+
+- Senior Software Engineer & Technical Lead — Intelcia Tech, Rabat (2023–present).
+  React / Next.js 15 / TypeScript frontends (40% perf gains, 10x traffic);
+  PHP (Symfony, PRADO) + Node.js (NestJS, Fastify) backends and microservices;
+  Docker + GitHub Actions CI/CD; mentors 5+ engineers.
+- Co-Founder, Lead Architect & Full-Stack Engineer — GoToDev / gotodev.ma
+  (2022–present). 12+ web & mobile apps. Built Nlivrilik (real-time last-mile
+  logistics). Delivered Aksam Assurance, Paylik, HoussniJob, Ibn Tofail
+  University, Jadara Foundation. Maintains the gotodev CLI.
+- Data Science Instructor — GoMyCode, Rabat (2023–2024). Python, Pandas,
+  Scikit-learn, predictive modeling.
+
+## Skills
+
+Languages: JavaScript (ES6+), TypeScript, PHP, Python, SQL, Bash.
+Frontend: React 19, Next.js 15, Vue.js, Angular, Svelte 5, Tailwind CSS, GSAP.
+Backend: Node.js, Express, NestJS, Fastify, Symfony, Laravel, REST, GraphQL, tRPC.
+Data: PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch.
+DevOps & Cloud: Docker, Kubernetes, GitHub Actions, GitLab CI, Nginx, Terraform,
+AWS (EC2, S3, RDS), Prometheus, Grafana, Linux.
+
+## Education & Certifications
+
+- M.Sc. Computer Science (Bac+5) — Woolf University, EU-accredited (in progress).
+- Licence MIAGE (Bac+3, European Bachelor) and DUT MIAGE (Bac+2).
+- Certified JavaScript Developer (Orange); ALX Software Engineering & Data
+  Science; Certified Hedera Blockchain Developer.
+
+## Links
+
+- Home: https://oussamaezitouni.com/
+- GitHub: https://github.com/ezitounioussama
+- LinkedIn: https://www.linkedin.com/in/ezitounioussama
+- Agency: https://gotodev.ma
+- Email: ezitounioussama@gmail.com
+
+## Notes for agents
+
+This is a single-page portfolio (sections: Home, Experience, About, Contact).
+For collaboration, freelance, or hiring inquiries, use the email above or the
+contact form on the site.

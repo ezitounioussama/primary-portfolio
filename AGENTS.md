@@ -47,10 +47,14 @@ bunx --bun shadcn@latest add @magicui/<c>    # Magic UI
 ```
 src/
   app/
-    layout.js              # root layout — dark, Geist fonts, wraps <SmoothScroll> + <FloatingDock>
-    page.js                # home — composition (Hero → Curve → Experience → About → Contact)
+    layout.js              # root layout — metadata + viewport, fonts, theme init, chrome
+    page.js                # home — section composition + JSON-LD structured data
     actions.js             # "use server" — submitContact Server Action
     globals.css            # Tailwind v4 + shadcn tokens (@theme) + accent-1..5 + Lenis baseline
+    favicon.ico            # site icon (from gotodev.ma)
+    opengraph-image.js     # dynamic OG/Twitter card (next/og ImageResponse, 1200x630)
+    sitemap.js             # /sitemap.xml
+    robots.js              # /robots.txt (allows Googlebot + AI crawlers, links sitemap)
   components/
     smooth-scroll.jsx        # Lenis ↔ GSAP ticker ↔ ScrollTrigger provider (client)
     nav/floating-dock.jsx    # magnify-on-hover dock (GSAP quickTo)
@@ -62,11 +66,30 @@ src/
     ui/                      # shadcn primitives (animated-theme-toggler, …)
   lib/
     utils.js               # cn()
-    data.js                # PROFILE, NAV_ITEMS, STACK, TIMELINE (all resume content)
+    data.js                # SITE_URL, PROFILE, NAV_ITEMS, STACK, TIMELINE (all resume content)
+public/
+    llms.txt               # /llms.txt — structured site summary for AI agents
 ```
 
 All portfolio content is real (from Oussama's resume) and lives in `lib/data.js` —
 edit copy there, not in components.
+
+## SEO & metadata
+
+- **`SITE_URL`** in `lib/data.js` is the canonical origin — reads
+  `NEXT_PUBLIC_SITE_URL`, falls back to a **placeholder** (`oussamaezitouni.com`).
+  **Set the env var to the real deploy domain** before shipping; it feeds
+  `metadataBase`, canonical, OG/Twitter URLs, sitemap, robots, and JSON-LD.
+- Root **`metadata`** + **`viewport`** live in `layout.js` (title template,
+  description, keywords, authors, OG, Twitter, `robots.googleBot`, icons,
+  themeColor). Per-page metadata: add a `metadata` export (or `generateMetadata`)
+  to that route; the title `template` appends `— Oussama Ezitouni`.
+- **JSON-LD** (`Person` + `WebSite` + `ProfilePage`) is injected in `page.js` from
+  `lib/data.js` — update the data, not hand-written schema.
+- **OG image** is generated at build by `opengraph-image.js` (`next/og`). Satori
+  supports only linear/radial gradients — **no `conic-gradient`** there.
+- Regenerate/verify: `bun run build` emits `/opengraph-image`, `/sitemap.xml`,
+  `/robots.txt`; `/llms.txt` and `/favicon.ico` are static.
 
 Keep page sections as composable components in `src/components/`. `page.js` reads
 as a clear top-to-bottom composition of sections.

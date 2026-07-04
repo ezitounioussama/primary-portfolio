@@ -1,5 +1,11 @@
 // Central content for the portfolio. Edit here; sections read from this.
 
+// Canonical production origin (no trailing slash). Set NEXT_PUBLIC_SITE_URL in the
+// environment for the real domain; the fallback is a placeholder — update it.
+export const SITE_URL =
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+    "https://oussamaezitouni.com";
+
 export const PROFILE = {
     name: "Oussama Ezitouni",
     role: "Senior Full-Stack Engineer",
