@@ -26,7 +26,7 @@ with the same care as the data layer.
 | Smooth scroll      | `lenis`                                         | Wired into GSAP's ticker in `components/smooth-scroll.jsx`; ScrollTrigger stays in sync. Drives parallax + scroll-linked effects. |
 | Icons              | `lucide-react`                                  | Set by the Nova preset. |
 | Utils              | `cn()` in `src/lib/utils.js`                    | `clsx` + `tailwind-merge`. Always compose classes through `cn`. |
-| Fonts              | Geist Sans + Geist Mono via `next/font/google`  | Exposed as `--font-geist-sans` / `--font-geist-mono`. |
+| Fonts              | Geist Sans + Geist Mono + Instrument Serif via `next/font/google` | `--font-geist-sans` / `--font-geist-mono` / `--font-instrument`. `font-serif` (Instrument Serif, has italic) is the display accent used in the hero. |
 | Lint / format      | Biome `2.2.0`                                   | `bun run lint` (`biome check`), `bun run format`. |
 | Package manager    | **Bun** (`bun.lock`)                            | Use `bun` / `bunx --bun`. Do not add `package-lock.json` / `pnpm-lock.yaml`. |
 
@@ -54,7 +54,7 @@ src/
   components/
     smooth-scroll.jsx        # Lenis ↔ GSAP ticker ↔ ScrollTrigger provider (client)
     nav/floating-dock.jsx    # magnify-on-hover dock (GSAP quickTo)
-    hero/gemini-hero.jsx     # scroll-driven SVG bezier draw, pinned + scrubbed
+    hero/parallax-hero.jsx   # 3D mouse-parallax holographic orb + editorial chrome
     transitions/curve.jsx    # velocity-reactive bezier divider between sections
     experience/timeline.jsx  # Aceternity Timeline (scroll-beam) ported to GSAP
     sections/about.jsx       # parallax + word-by-word reveal
@@ -84,10 +84,14 @@ was ported to GSAP, not the code). When extending, **read the reference with
 2. **Navigation** — [Aceternity Floating Dock](https://ui.aceternity.com/components/floating-dock)
    → `nav/floating-dock.jsx`. Per-item `gsap.quickTo` magnifies icons by cursor distance.
 
-3. **Hero** — refactor of the
-   [Aceternity Google Gemini Effect](https://ui.aceternity.com/components/google-gemini-effect)
-   → `hero/gemini-hero.jsx`. Five `pathLength="1"` ribbons drawn via
-   `strokeDashoffset` on a pinned, scrubbed ScrollTrigger timeline; title parallaxes.
+3. **Hero** — 3D mouse-parallax orb, inspired by the
+   [ARKON DIGITAL awwwards reference](https://www.awwwards.com/inspiration/3d-mouse-parallax-ad-personal-portfolio)
+   → `hero/parallax-hero.jsx`. A holographic orb (animated conic-gradient blobs) over a
+   reflective ground with editorial corner labels + script/bold headline. `pointermove`
+   drives `gsap.quickTo` on each `[data-depth]` layer and tilts the scene (rotateX/Y).
+   **Gotcha:** CSS centering (`-translate-x-1/2`) lives on static wrappers; GSAP animates
+   x/y on separate inner `[data-depth]` nodes so the transforms don't fight. Disabled
+   under `prefers-reduced-motion`. (Replaced the earlier Gemini-effect hero.)
 
 4. **Section transitions** — [SVG Bézier curve](https://blog.olivierlarose.com/demos/svg-bezier-curve)
    → `transitions/curve.jsx`. Control point pushed by `self.getVelocity()`, springs
@@ -118,8 +122,9 @@ Follow the official **GSAP skills** (`greensock/gsap-skills`): `gsap-react`,
 
 - Theme is the **`.dark` class on `<html>`** (Tailwind `@custom-variant dark`).
   Persisted in **`localStorage.theme`** (`"light"` | `"dark"`).
-- A blocking inline script in `layout.js` applies the saved theme (or system
-  preference) **before paint** — no FOUC. `<html>` has `suppressHydrationWarning`.
+- A blocking inline script in `layout.js` applies the saved theme **before paint**
+  — no FOUC. **Dark-first:** defaults to dark unless the visitor explicitly chose
+  light. `<html>` has `suppressHydrationWarning`.
 - The toggle is **`components/ui/animated-theme-toggler.jsx`** (Magic UI, added via
   `@magicui/animated-theme-toggler`), rendered fixed top-right in `layout.js`. It
   uses the **View Transitions API** (clip-path reveal) and, uncontrolled, writes

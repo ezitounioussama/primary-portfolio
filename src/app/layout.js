@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import FloatingDock from "@/components/nav/floating-dock";
 import SmoothScroll from "@/components/smooth-scroll";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
@@ -11,6 +11,13 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
     variable: "--font-geist-mono",
+    subsets: ["latin"],
+});
+
+const instrumentSerif = Instrument_Serif({
+    weight: "400",
+    style: ["normal", "italic"],
+    variable: "--font-instrument",
     subsets: ["latin"],
 });
 
@@ -27,11 +34,11 @@ const themeInitScript = `
 (function () {
   try {
     var t = localStorage.getItem("theme");
-    if (t !== "light" && t !== "dark") {
-      t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
-    document.documentElement.classList.toggle("dark", t === "dark");
-  } catch (e) {}
+    // Dark-first design: default to dark unless the visitor explicitly chose light.
+    document.documentElement.classList.toggle("dark", t !== "light");
+  } catch (e) {
+    document.documentElement.classList.add("dark");
+  }
 })();
 `;
 
@@ -40,7 +47,7 @@ export default function RootLayout({ children }) {
         <html
             lang="en"
             suppressHydrationWarning
-            className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+            className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
             style={{ "--font-sans": "var(--font-geist-sans)" }}
         >
             <body className="min-h-full">
