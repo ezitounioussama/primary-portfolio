@@ -8,6 +8,15 @@ export const SITE_URL =
 
 export const PROFILE = {
     name: "Oussama Ezitouni",
+    // Common misspellings/variants — fed to JSON-LD alternateName + keywords
+    // so searches with the wrong spelling still resolve to this site.
+    alternateNames: [
+        "Oussama Zitouni",
+        "Oussama Ezzitouni",
+        "Ousama Ezitouni",
+        "Usama Ezitouni",
+        "Oussama El Zitouni",
+    ],
     role: "Senior Full-Stack Engineer",
     tagline: "JavaScript Expert · PHP Specialist · DevOps Architect",
     location: "Kenitra / Rabat, Morocco",

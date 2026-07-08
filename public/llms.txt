@@ -4,7 +4,11 @@
 > full-stack software engineer, DevOps architect, and technical lead with 3+
 > years building scalable web applications. Dual expertise across the JavaScript
 > (React, Next.js, Node.js, NestJS) and PHP (Symfony, Laravel) ecosystems.
-> Co-founder of the GoToDev software agency.
+> Currently a Senior Software Engineer & Technical Lead at Intelcia Tech.
+
+Name variants and common misspellings that refer to the same person:
+Oussama Ezitouni, Oussama Zitouni, Oussama Ezzitouni, Ousama Ezitouni,
+Usama Ezitouni, Oussama El Zitouni.
 
 Contact: ezitounioussama@gmail.com
 Location: Kenitra / Rabat, Morocco
@@ -12,33 +16,36 @@ Languages: Arabic (native), English (C1), French (B2)
 
 ## About
 
-Results-driven senior full-stack engineer who owns the full SDLC — from
-requirements and system design to production deployment and performance
-optimization. Started in the backend and moved into creating fast, expressive
-frontend and 3D web experiences. Leads technical teams, mentors engineers, and
-drives DevOps transformation.
+- [About Oussama](https://oussamaezitouni.com/#about): Results-driven senior
+  full-stack engineer who owns the full SDLC — from requirements and system
+  design to production deployment and performance optimization. Started in the
+  backend and moved into creating fast, expressive frontend and 3D web
+  experiences. Leads technical teams, mentors engineers, and drives DevOps
+  transformation.
 
 ## Experience
 
-- Senior Software Engineer & Technical Lead — Intelcia Tech, Rabat (2023–present).
-  React / Next.js 15 / TypeScript frontends (40% perf gains, 10x traffic);
-  PHP (Symfony, PRADO) + Node.js (NestJS, Fastify) backends and microservices;
-  Docker + GitHub Actions CI/CD; mentors 5+ engineers.
-- Co-Founder, Lead Architect & Full-Stack Engineer — GoToDev / gotodev.ma
-  (2022–present). 12+ web & mobile apps. Built Nlivrilik (real-time last-mile
-  logistics). Delivered Aksam Assurance, Paylik, HoussniJob, Ibn Tofail
-  University, Jadara Foundation. Maintains the gotodev CLI.
-- Data Science Instructor — GoMyCode, Rabat (2023–2024). Python, Pandas,
-  Scikit-learn, predictive modeling.
+- [Experience timeline](https://oussamaezitouni.com/#experience): Senior
+  Software Engineer & Technical Lead at Intelcia Tech, Rabat (2023–present) —
+  React / Next.js 15 / TypeScript frontends (40% perf gains, 10x traffic), PHP
+  (Symfony, PRADO) + Node.js (NestJS, Fastify) backends and microservices,
+  Docker + GitHub Actions CI/CD, mentors 5+ engineers. Freelance full-stack
+  engineer (2022–present) — 12+ web & mobile apps including Nlivrilik
+  (real-time last-mile logistics), Aksam Assurance, Paylik, HoussniJob, Ibn
+  Tofail University, Jadara Foundation. Data Science Instructor at GoMyCode,
+  Rabat (2023–2024).
+- Affiliation: co-founder of [GoToDev](https://gotodev.ma), a Moroccan web &
+  mobile development agency.
 
 ## Skills
 
-Languages: JavaScript (ES6+), TypeScript, PHP, Python, SQL, Bash.
-Frontend: React 19, Next.js 15, Vue.js, Angular, Svelte 5, Tailwind CSS, GSAP.
-Backend: Node.js, Express, NestJS, Fastify, Symfony, Laravel, REST, GraphQL, tRPC.
-Data: PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch.
-DevOps & Cloud: Docker, Kubernetes, GitHub Actions, GitLab CI, Nginx, Terraform,
-AWS (EC2, S3, RDS), Prometheus, Grafana, Linux.
+- [Tech stack](https://oussamaezitouni.com/#stack): JavaScript (ES6+),
+  TypeScript, PHP, Python, SQL, Bash. Frontend: React 19, Next.js 15, Vue.js,
+  Angular, Svelte 5, Tailwind CSS, GSAP. Backend: Node.js, Express, NestJS,
+  Fastify, Symfony, Laravel, REST, GraphQL, tRPC. Data: PostgreSQL, MySQL,
+  MongoDB, Redis, Elasticsearch. Data science: Pandas, NumPy, Scikit-learn,
+  TensorFlow. DevOps & Cloud: Docker, Kubernetes, GitHub Actions, GitLab CI,
+  Nginx, Terraform, AWS (EC2, S3, RDS), Prometheus, Grafana, Linux.
 
 ## Education & Certifications
 
@@ -49,14 +56,16 @@ AWS (EC2, S3, RDS), Prometheus, Grafana, Linux.
 
 ## Links
 
-- Home: https://oussamaezitouni.com/
-- GitHub: https://github.com/ezitounioussama
-- LinkedIn: https://www.linkedin.com/in/ezitounioussama
-- Agency: https://gotodev.ma
-- Email: ezitounioussama@gmail.com
+- [Home](https://oussamaezitouni.com/): single-page portfolio (Home,
+  Experience, About, Stack, Contact)
+- [GitHub](https://github.com/ezitounioussama): 120+ public repositories
+- [LinkedIn](https://www.linkedin.com/in/ezitounioussama): professional profile
+- [GoToDev](https://gotodev.ma): agency site
+- [Contact](https://oussamaezitouni.com/#contact): contact form, or email
+  ezitounioussama@gmail.com
 
 ## Notes for agents
 
-This is a single-page portfolio (sections: Home, Experience, About, Contact).
-For collaboration, freelance, or hiring inquiries, use the email above or the
-contact form on the site.
+This is a single-page portfolio (sections: Home, Experience, About, Stack,
+Contact). For collaboration, freelance, or hiring inquiries, use the email
+above or the contact form on the site.

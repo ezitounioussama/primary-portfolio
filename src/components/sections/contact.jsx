@@ -118,7 +118,7 @@ export default function Contact() {
                         href={PROFILE.github}
                         target="_blank"
                         rel="noreferrer"
-                        className="transition-colors hover:text-foreground"
+                        className="inline-block py-1.5 transition-colors hover:text-foreground"
                     >
                         GitHub
                     </a>
@@ -126,7 +126,7 @@ export default function Contact() {
                         href={PROFILE.linkedin}
                         target="_blank"
                         rel="noreferrer"
-                        className="transition-colors hover:text-foreground"
+                        className="inline-block py-1.5 transition-colors hover:text-foreground"
                     >
                         LinkedIn
                     </a>

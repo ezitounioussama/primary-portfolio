@@ -40,11 +40,13 @@ export default function ParallaxHero() {
                 stagger: 0.08,
                 ease: "power4.out",
             });
+            // Keep entrance fades short: long fades leave semi-transparent
+            // text when audits/users sample the page early.
             gsap.from(".hero-fade", {
                 opacity: 0,
-                duration: 1.2,
-                stagger: 0.06,
-                delay: 0.3,
+                duration: 0.7,
+                stagger: 0.05,
+                delay: 0.1,
                 ease: "power2.out",
             });
             gsap.from(".orb-scale", {
@@ -188,10 +190,10 @@ export default function ParallaxHero() {
             <div className="pointer-events-none absolute inset-0 flex items-center">
                 <div data-depth="18" className="px-6 md:px-12">
                     <h1 className="leading-[0.82]">
-                        <span className="hero-rise block font-serif text-6xl italic text-foreground sm:text-7xl md:text-8xl">
+                        <span className="hero-rise block font-serif text-6xl italic text-foreground sm:text-7xl lg:text-8xl">
                             Full-stack
                         </span>
-                        <span className="hero-rise block text-6xl font-semibold uppercase tracking-tight text-foreground sm:text-8xl md:text-[9rem]">
+                        <span className="hero-rise block text-6xl font-semibold uppercase tracking-tight text-foreground sm:text-8xl lg:text-[9rem]">
                             Engineer.
                         </span>
                     </h1>
@@ -226,7 +228,7 @@ export default function ParallaxHero() {
                     </p>
                 </div>
                 <nav
-                    className="hero-fade hidden flex-col items-end gap-1 md:flex"
+                    className="hero-fade hidden flex-col items-end pr-14 md:flex"
                     data-depth="6"
                     aria-label="Hero"
                 >
@@ -234,7 +236,7 @@ export default function ParallaxHero() {
                         <a
                             key={n.href}
                             href={n.href}
-                            className="pointer-events-auto text-muted-foreground transition-colors hover:text-foreground"
+                            className="pointer-events-auto inline-block py-1.5 text-muted-foreground transition-colors hover:text-foreground"
                         >
                             {n.label}
                         </a>
@@ -242,8 +244,8 @@ export default function ParallaxHero() {
                 </nav>
             </header>
 
-            {/* Right intro paragraph */}
-            <div className="absolute right-6 top-1/2 hidden -translate-y-1/2 md:right-12 md:block">
+            {/* Right intro paragraph (lg+: collides with the headline below that) */}
+            <div className="absolute right-6 top-1/2 hidden -translate-y-1/2 lg:right-12 lg:block">
                 <p
                     data-depth="12"
                     className="hero-fade max-w-60 font-mono text-sm leading-relaxed text-muted-foreground"
@@ -260,8 +262,8 @@ export default function ParallaxHero() {
                 </p>
             </div>
 
-            {/* Bottom bar */}
-            <footer className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 p-6 font-mono text-xs text-muted-foreground md:p-8">
+            {/* Bottom bar (hidden on mobile — the floating dock owns that space) */}
+            <footer className="absolute inset-x-0 bottom-0 hidden items-end justify-between gap-6 p-6 font-mono text-xs text-muted-foreground sm:flex md:p-8">
                 <div className="hero-fade" data-depth="8">
                     <p className="uppercase tracking-wide">Local time</p>
                     <Clock />
@@ -275,7 +277,7 @@ export default function ParallaxHero() {
                         href={PROFILE.github}
                         target="_blank"
                         rel="noreferrer"
-                        className="transition-colors hover:text-foreground"
+                        className="inline-block py-1.5 transition-colors hover:text-foreground"
                     >
                         GitHub
                     </a>
@@ -283,7 +285,7 @@ export default function ParallaxHero() {
                         href={PROFILE.linkedin}
                         target="_blank"
                         rel="noreferrer"
-                        className="transition-colors hover:text-foreground"
+                        className="inline-block py-1.5 transition-colors hover:text-foreground"
                     >
                         LinkedIn
                     </a>

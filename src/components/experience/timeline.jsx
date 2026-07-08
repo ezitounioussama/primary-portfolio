@@ -106,9 +106,9 @@ export default function ExperienceTimeline() {
                                 <div className="absolute left-2 flex h-10 w-10 items-center justify-center rounded-full bg-background md:left-2">
                                     <div className="h-3 w-3 rounded-full border border-border bg-muted transition-all duration-500 group-[.is-active]:scale-125 group-[.is-active]:border-accent-4 group-[.is-active]:bg-accent-4 group-[.is-active]:shadow-[0_0_14px_var(--accent-4)]" />
                                 </div>
-                                <h3 className="hidden font-mono text-xl font-bold text-muted-foreground transition-colors duration-500 md:block md:pl-16 md:text-4xl group-[.is-active]:text-foreground">
+                                <p className="hidden font-mono text-xl font-bold text-muted-foreground transition-colors duration-500 md:block md:pl-16 md:text-4xl group-[.is-active]:text-foreground">
                                     {item.period}
-                                </h3>
+                                </p>
                             </div>
 
                             {/* Content */}
@@ -116,9 +116,9 @@ export default function ExperienceTimeline() {
                                 <p className="mb-1 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground md:hidden">
                                     {item.period}
                                 </p>
-                                <h4 className="text-xl font-semibold tracking-tight md:text-2xl">
+                                <h3 className="text-xl font-semibold tracking-tight md:text-2xl">
                                     {item.role}
-                                </h4>
+                                </h3>
                                 <p className="mt-1 text-sm text-muted-foreground">
                                     {item.org}
                                 </p>

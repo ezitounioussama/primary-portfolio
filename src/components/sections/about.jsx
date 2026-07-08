@@ -39,9 +39,11 @@ export default function About() {
                 "(prefers-reduced-motion: reduce)",
             ).matches;
 
-            // Word-by-word reveal of the bio (scrubbed).
+            // Word-by-word reveal of the bio (scrubbed). Dim state is opacity
+            // 0 (not 0.1x): axe skips non-rendered text, so the pre-reveal
+            // state can't fail color-contrast; screen readers still read it.
             gsap.from(".about-word", {
-                opacity: 0.12,
+                opacity: 0,
                 stagger: 0.04,
                 ease: "none",
                 scrollTrigger: {
@@ -229,23 +231,25 @@ export default function About() {
                         ))}
                     </p>
 
-                    <div className="about-rise mt-8 flex items-center gap-3 font-mono text-xs text-muted-foreground">
-                        <span className="relative flex h-2.5 w-2.5">
+                    <div className="about-rise mt-8 flex flex-wrap items-center gap-x-2 gap-y-2 font-mono text-xs text-muted-foreground">
+                        <span className="relative mr-1 flex h-2.5 w-2.5">
                             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-3 opacity-60" />
                             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent-3" />
                         </span>
-                        {ABOUT.availability} ·{" "}
+                        <span className="whitespace-nowrap">
+                            {ABOUT.availability} ·
+                        </span>
                         <a
                             href={`mailto:${PROFILE.email}`}
-                            className="text-foreground underline underline-offset-4 hover:text-accent-3"
+                            className="inline-block py-1 text-foreground underline underline-offset-4 hover:text-accent-3"
                         >
                             {PROFILE.email}
                         </a>
                     </div>
                 </div>
 
-                {/* Holographic portrait card */}
-                <div className="mx-auto [perspective:900px]">
+                {/* Holographic portrait card (px keeps orbit chips inside the viewport) */}
+                <div className="mx-auto px-10 [perspective:900px]">
                     <div
                         ref={cardRef}
                         className="relative w-fit [transform-style:preserve-3d]"

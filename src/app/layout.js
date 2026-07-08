@@ -39,6 +39,7 @@ export const metadata = {
     category: "technology",
     keywords: [
         "Oussama Ezitouni",
+        ...PROFILE.alternateNames,
         "Senior Full-Stack Engineer",
         "Full-Stack Developer Morocco",
         "React developer",
@@ -127,9 +128,9 @@ export default function RootLayout({ children }) {
                 <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
                 <SmoothScroll>{children}</SmoothScroll>
                 <FloatingDock />
+                {/* Accessible name comes from the component's own sr-only text */}
                 <AnimatedThemeToggler
                     variant="circle"
-                    aria-label="Toggle color theme"
                     className="fixed right-6 top-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/60 text-foreground shadow-lg backdrop-blur-xl transition-colors hover:bg-foreground/10 [&>svg]:h-5 [&>svg]:w-5"
                 />
             </body>
