@@ -139,11 +139,16 @@ was ported to GSAP, not the code). When extending, **read the reference with
    normal blending with the material `color` multiplier set to deep indigo
    (`0x4c4c8a`) so dots stay saturated on white. Static single frame under
    `prefers-reduced-motion`.
-   DOM side: a radial **legibility veil** sits between canvas and content;
-   each `.timeline-entry` gets `is-active` toggled by a ScrollTrigger
-   (start `top 45%` / end `bottom 35%`) and children style themselves via
-   `group-[.is-active]:` variants (glowing accent node, brightened period
-   label); the beam is 2px with an accent glow shadow.
+   DOM side: a radial **legibility veil** sits between canvas and content.
+   Entries are **glass cards** that reveal individually on arrival (rise +
+   blur→sharp; bullets/tags cascade). A **focus lens** keeps the entry in the
+   reading zone lit: each `.timeline-entry` gets `is-active` toggled by a
+   ScrollTrigger (start `top 60%` / end `bottom 25%`) and children style via
+   `group-[.is-active]:` variants (glowing accent node, scaled period label,
+   accent card border/glow). The dimmer is a **dedicated inner node**
+   (CSS-only opacity) so it never fights GSAP's inline entrance styles on
+   `.timeline-card`. The 2px beam carries a glowing **comet** on its tip.
+   Per-role `tags` chips come from `TIMELINE[].tags` in `lib/data.js`.
    **Gotcha:** the canvas lives in an absolute `overflow-hidden` wrapper
    *sibling* to the content — the section itself must NOT get
    `overflow-hidden` or the sticky labels break.
