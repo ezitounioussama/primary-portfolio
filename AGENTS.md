@@ -24,6 +24,7 @@ with the same care as the data layer.
 | Effects registry   | Magic UI — registry `@magicui`                  | `bunx --bun shadcn@latest add @magicui/<name>`. |
 | Animation          | **GSAP** — `gsap` + `@gsap/react` + `ScrollTrigger` | The animation engine. Follow the GSAP skills (`useGSAP`, `scope`, cleanup, SSR-safe). The Aceternity / Olivier Larose references use Framer Motion — port the *visual idea* to GSAP, do not add `motion`. |
 | Smooth scroll      | `lenis`                                         | Wired into GSAP's ticker in `components/smooth-scroll.jsx`; ScrollTrigger stays in sync. Drives parallax + scroll-linked effects. |
+| 3D                 | `three`                                         | Used sparingly for real-3D set pieces (`components/three/particle-globe.jsx`). Render loops run on `gsap.ticker`, gated to viewport visibility; dispose geometries/materials/renderer in the `useGSAP` cleanup. |
 | Icons              | `lucide-react`                                  | Set by the Nova preset. |
 | Utils              | `cn()` in `src/lib/utils.js`                    | `clsx` + `tailwind-merge`. Always compose classes through `cn`. |
 | Fonts              | Geist Sans + Geist Mono + Instrument Serif via `next/font/google` | `--font-geist-sans` / `--font-geist-mono` / `--font-instrument`. `font-serif` (Instrument Serif, has italic) is the display accent used in the hero. |
@@ -60,7 +61,8 @@ src/
     nav/floating-dock.jsx    # magnify-on-hover dock (GSAP quickTo)
     hero/parallax-hero.jsx   # 3D mouse-parallax holographic orb + editorial chrome
     transitions/curve.jsx    # velocity-reactive bezier divider between sections
-    experience/timeline.jsx  # Aceternity Timeline (scroll-beam) ported to GSAP
+    experience/timeline.jsx  # Aceternity Timeline (scroll-beam) ported to GSAP + particle-globe backdrop
+    three/particle-globe.jsx # Three.js dotted planet — scroll-scrubbed sweep (ARKON-style)
     sections/about.jsx       # Halpin-style intro — 3D holographic portrait card, count-up stats, value cards
     sections/tech-stack.jsx  # glassy icon wall — 3D tilt, center-out entrance, category filter
     sections/contact.jsx     # contact form (useActionState → submitContact)
@@ -126,6 +128,25 @@ was ported to GSAP, not the code). When extending, **read the reference with
    ScrollTrigger scrub (start `"top 10%"` → end `"bottom 50%"`, `invalidateOnRefresh`),
    porting Aceternity's Framer `useScroll`/`useTransform`. Driven by `lib/data.js`
    `TIMELINE`. (Replaced the earlier Olivier Larose image-slide gallery.)
+   Behind it, `three/particle-globe.jsx` renders an ARKON-style dotted particle
+   planet (Fibonacci sphere + halo dust + tilted Saturn-style ring band, soft
+   radial sprite so dots aren't squares) that sweeps in huge from the
+   bottom-right and rotates/drifts on a scrubbed timeline across the whole
+   section. **Scene fog** (color = page background per theme) depth-fades the
+   far side — the GitHub-globe volume trick. Idle spin runs on `gsap.ticker`,
+   added/removed by a viewport-visibility ScrollTrigger; theme handling via a
+   `.dark`-class MutationObserver: dark = additive glow blending, light =
+   normal blending with the material `color` multiplier set to deep indigo
+   (`0x4c4c8a`) so dots stay saturated on white. Static single frame under
+   `prefers-reduced-motion`.
+   DOM side: a radial **legibility veil** sits between canvas and content;
+   each `.timeline-entry` gets `is-active` toggled by a ScrollTrigger
+   (start `top 45%` / end `bottom 35%`) and children style themselves via
+   `group-[.is-active]:` variants (glowing accent node, brightened period
+   label); the beam is 2px with an accent glow shadow.
+   **Gotcha:** the canvas lives in an absolute `overflow-hidden` wrapper
+   *sibling* to the content — the section itself must NOT get
+   `overflow-hidden` or the sticky labels break.
 
 6. **About** — personal intro (reference: seanhalpin.xyz/about)
    → `sections/about.jsx`. "I'm Oussama." greeting with inline accent highlights;

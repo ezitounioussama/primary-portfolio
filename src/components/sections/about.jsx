@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Gauge, GraduationCap, Layers, MapPin } from "lucide-react";
+import { Gauge, GraduationCap, Layers } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
 import { ABOUT, PROFILE } from "@/lib/data";
@@ -218,6 +218,7 @@ export default function About() {
                         <span className="underline decoration-accent-2 decoration-2 underline-offset-4">
                             Intelcia Tech
                         </span>
+                        .
                     </p>
 
                     <p className="about-bio mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">

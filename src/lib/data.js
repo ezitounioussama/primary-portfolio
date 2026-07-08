@@ -110,7 +110,7 @@ export const TECH_STACK = [
 // About section content (Halpin-style personal intro).
 export const ABOUT = {
     greeting: "I'm Oussama.",
-    intro: "A senior full-stack engineer at Intelcia Tech, building from Rabat, Morocco.",
+    intro: "A senior full-stack engineer at Intelcia Tech.",
     bio: "Software engineer and data scientist at heart — for the past 3 years I've been architecting enterprise platforms at Intelcia Tech that serve millions of users, and shipping freelance web, mobile, and AI products on the side. When I'm not shipping, I'm writing on DEV.to or mentoring the next wave of engineers.",
     availability: "Available for freelance",
     stats: [
