@@ -28,12 +28,13 @@ export const PROFILE = {
         "Senior full-stack engineer with 3+ years architecting and shipping scalable web applications across enterprise and startup ecosystems — dual expertise in the JavaScript and PHP worlds, plus DevOps and cloud-native infrastructure.",
 };
 
+// Root-relative anchors (/#x, not #x) so links work from any route (e.g. 404).
 export const NAV_ITEMS = [
-    { label: "Home", href: "#home", icon: "home" },
-    { label: "Experience", href: "#experience", icon: "layers" },
-    { label: "About", href: "#about", icon: "user" },
-    { label: "Stack", href: "#stack", icon: "code" },
-    { label: "Contact", href: "#contact", icon: "mail" },
+    { label: "Home", href: "/#home", icon: "home" },
+    { label: "Experience", href: "/#experience", icon: "layers" },
+    { label: "About", href: "/#about", icon: "user" },
+    { label: "Stack", href: "/#stack", icon: "code" },
+    { label: "Contact", href: "/#contact", icon: "mail" },
     { label: "GitHub", href: PROFILE.github, icon: "github", external: true },
 ];
 

@@ -56,8 +56,10 @@ src/
     opengraph-image.js     # dynamic OG/Twitter card (next/og ImageResponse, 1200x630)
     sitemap.js             # /sitemap.xml
     robots.js              # /robots.txt (allows Googlebot + AI crawlers, links sitemap)
+    not-found.js           # 404 (noindex) → components/not-found-scene.jsx
   components/
     smooth-scroll.jsx        # Lenis ↔ GSAP ticker ↔ ScrollTrigger provider (client)
+    not-found-scene.jsx      # 404 scene — hero-style orb + parallax + "Back home" CTA (CTA stays out of GSAP fades)
     nav/floating-dock.jsx    # magnify-on-hover dock (GSAP quickTo)
     hero/parallax-hero.jsx   # 3D mouse-parallax holographic orb + editorial chrome
     transitions/curve.jsx    # velocity-reactive bezier divider between sections
