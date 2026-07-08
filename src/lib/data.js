@@ -23,11 +23,12 @@ export const NAV_ITEMS = [
     { label: "Home", href: "#home", icon: "home" },
     { label: "Experience", href: "#experience", icon: "layers" },
     { label: "About", href: "#about", icon: "user" },
+    { label: "Stack", href: "#stack", icon: "code" },
     { label: "Contact", href: "#contact", icon: "mail" },
     { label: "GitHub", href: PROFILE.github, icon: "github", external: true },
 ];
 
-// Skills surfaced as chips in the About section.
+// Skills summary (JSON-LD knowsAbout + About copy).
 export const STACK = [
     "React 19",
     "Next.js 15",
@@ -46,6 +47,104 @@ export const STACK = [
     "AWS",
 ];
 
+// Tech-stack section tiles. `icon` is a simple-icons CDN slug
+// (https://cdn.simpleicons.org/<slug>) — verify a slug 200s before adding.
+export const TECH_CATEGORIES = [
+    { key: "js", label: "JavaScript" },
+    { key: "php", label: "PHP" },
+    { key: "data", label: "Data Science" },
+    { key: "db", label: "Databases" },
+    { key: "devops", label: "DevOps & Cloud" },
+];
+
+export const TECH_STACK = [
+    // JavaScript ecosystem
+    { name: "JavaScript", icon: "javascript", category: "js" },
+    { name: "TypeScript", icon: "typescript", category: "js" },
+    { name: "React", icon: "react", category: "js" },
+    { name: "Next.js", icon: "nextdotjs", category: "js" },
+    { name: "Vue.js", icon: "vuedotjs", category: "js" },
+    { name: "Angular", icon: "angular", category: "js" },
+    { name: "Svelte", icon: "svelte", category: "js" },
+    { name: "Node.js", icon: "nodedotjs", category: "js" },
+    { name: "NestJS", icon: "nestjs", category: "js" },
+    { name: "Express", icon: "express", category: "js" },
+    { name: "Fastify", icon: "fastify", category: "js" },
+    { name: "GSAP", icon: "greensock", category: "js" },
+    { name: "Tailwind", icon: "tailwindcss", category: "js" },
+    { name: "GraphQL", icon: "graphql", category: "js" },
+    { name: "Jest", icon: "jest", category: "js" },
+    { name: "Cypress", icon: "cypress", category: "js" },
+    // PHP ecosystem
+    { name: "PHP", icon: "php", category: "php" },
+    { name: "Symfony", icon: "symfony", category: "php" },
+    { name: "Laravel", icon: "laravel", category: "php" },
+    // Data science
+    { name: "Python", icon: "python", category: "data" },
+    { name: "Pandas", icon: "pandas", category: "data" },
+    { name: "NumPy", icon: "numpy", category: "data" },
+    { name: "Scikit-learn", icon: "scikitlearn", category: "data" },
+    { name: "TensorFlow", icon: "tensorflow", category: "data" },
+    // Databases & caching
+    { name: "PostgreSQL", icon: "postgresql", category: "db" },
+    { name: "MySQL", icon: "mysql", category: "db" },
+    { name: "MongoDB", icon: "mongodb", category: "db" },
+    { name: "Redis", icon: "redis", category: "db" },
+    { name: "Elasticsearch", icon: "elasticsearch", category: "db" },
+    { name: "Firebase", icon: "firebase", category: "db" },
+    // DevOps & cloud
+    { name: "Docker", icon: "docker", category: "devops" },
+    { name: "Kubernetes", icon: "kubernetes", category: "devops" },
+    { name: "GitHub Actions", icon: "githubactions", category: "devops" },
+    { name: "GitLab CI", icon: "gitlab", category: "devops" },
+    { name: "Jenkins", icon: "jenkins", category: "devops" },
+    { name: "Nginx", icon: "nginx", category: "devops" },
+    { name: "Terraform", icon: "terraform", category: "devops" },
+    { name: "Prometheus", icon: "prometheus", category: "devops" },
+    { name: "Grafana", icon: "grafana", category: "devops" },
+    { name: "Linux", icon: "linux", category: "devops" },
+    { name: "Git", icon: "git", category: "devops" },
+    { name: "Bash", icon: "gnubash", category: "devops" },
+];
+
+// About section content (Halpin-style personal intro).
+export const ABOUT = {
+    greeting: "I'm Oussama.",
+    intro: "A senior full-stack engineer at Intelcia Tech, building from Rabat, Morocco.",
+    bio: "Software engineer and data scientist at heart — for the past 3 years I've been architecting enterprise platforms at Intelcia Tech that serve millions of users, and shipping freelance web, mobile, and AI products on the side. When I'm not shipping, I'm writing on DEV.to or mentoring the next wave of engineers.",
+    availability: "Available for freelance",
+    stats: [
+        { value: 3, suffix: "+", label: "Years building" },
+        { value: 12, suffix: "+", label: "Apps shipped" },
+        { value: 50, suffix: "+", label: "Institutions served" },
+        { value: 120, suffix: "+", label: "Public repos" },
+    ],
+    values: [
+        {
+            icon: "layers",
+            title: "End-to-end ownership",
+            body: "From requirements and system design to deployment and optimization — I own the full SDLC, not just a slice of it.",
+        },
+        {
+            icon: "gauge",
+            title: "Performance obsessed",
+            body: "40% faster loads and 10× traffic capacity on enterprise platforms. Speed is a feature, and I treat it like one.",
+        },
+        {
+            icon: "graduation",
+            title: "Teach & multiply",
+            body: "Mentored 5+ engineers and taught data science cohorts at GoMyCode. Knowledge shared is leverage gained.",
+        },
+    ],
+    // Floating chips orbiting the portrait (label + parallax depth).
+    orbit: [
+        { label: "React", depth: 30 },
+        { label: "PHP", depth: 22 },
+        { label: "Python · ML", depth: 38 },
+        { label: "DevOps", depth: 26 },
+    ],
+};
+
 // Career + education journey, rendered by the timeline section.
 export const TIMELINE = [
     {
@@ -62,14 +161,14 @@ export const TIMELINE = [
     },
     {
         period: "2022 — Now",
-        role: "Co-Founder, Lead Architect & Full-Stack Engineer",
-        org: "GoToDev · gotodev.ma",
+        role: "Freelance Full-Stack Engineer",
+        org: "Independent · Morocco",
         points: [
-            "Co-founded and scaled a software agency delivering 12+ web & mobile apps (React, Next.js, Vue, Node.js, Laravel, Symfony, React Native).",
+            "Shipped 12+ web & mobile apps for clients across industries (React, Next.js, Vue, Node.js, Laravel, Symfony, React Native).",
             "Owned system architecture, database design (PostgreSQL, MongoDB, Redis), APIs, frontend, DevOps, and cloud deployment end to end.",
             "Built Nlivrilik — real-time last-mile logistics with GPS tracking, driver routing, and multi-role dashboards (Next.js, Node.js, PostgreSQL).",
             "Delivered Aksam Assurance, Paylik, HoussniJob, Ibn Tofail University, and Jadara Foundation.",
-            "Shipped Toolkit.gotodev.ma and maintain the gotodev CLI (100+ weekly npm downloads).",
+            "Maintain a developer toolkit suite and CLI with 100+ weekly npm downloads.",
         ],
     },
     {

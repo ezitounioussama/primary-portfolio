@@ -2,7 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { GitBranch, Home, Layers, Mail, User } from "lucide-react";
+import { Code, GitBranch, Home, Layers, Mail, User } from "lucide-react";
 import { useRef } from "react";
 import { NAV_ITEMS } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -11,6 +11,7 @@ const ICONS = {
     home: Home,
     layers: Layers,
     user: User,
+    code: Code,
     mail: Mail,
     github: GitBranch,
 };

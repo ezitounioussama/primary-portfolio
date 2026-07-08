@@ -287,14 +287,6 @@ export default function ParallaxHero() {
                     >
                         LinkedIn
                     </a>
-                    <a
-                        href={PROFILE.site}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="transition-colors hover:text-foreground"
-                    >
-                        gotodev.ma
-                    </a>
                 </nav>
                 <div className="hero-fade text-right" data-depth="8">
                     <p>© {new Date().getFullYear()}</p>

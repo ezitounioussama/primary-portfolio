@@ -2,8 +2,9 @@ import ExperienceTimeline from "@/components/experience/timeline";
 import ParallaxHero from "@/components/hero/parallax-hero";
 import About from "@/components/sections/about";
 import Contact from "@/components/sections/contact";
+import TechStack from "@/components/sections/tech-stack";
 import Curve from "@/components/transitions/curve";
-import { PROFILE, SITE_URL, STACK, TIMELINE } from "@/lib/data";
+import { PROFILE, SITE_URL, STACK } from "@/lib/data";
 
 // Structured data: helps Google + AI crawlers understand who/what this is.
 const jsonLd = {
@@ -25,12 +26,17 @@ const jsonLd = {
             },
             sameAs: [PROFILE.github, PROFILE.linkedin, PROFILE.site],
             knowsAbout: STACK,
-            worksFor: TIMELINE.filter((t) => t.period.includes("Now")).map(
-                (t) => ({
-                    "@type": "Organization",
-                    name: t.org.split(" · ")[0],
-                }),
-            ),
+            worksFor: {
+                "@type": "Organization",
+                name: "Intelcia Tech",
+                location: "Rabat, Morocco",
+            },
+            // Kept in structured data only (not shown in the page UI).
+            affiliation: {
+                "@type": "Organization",
+                name: "GoToDev",
+                url: PROFILE.site,
+            },
         },
         {
             "@type": "WebSite",
@@ -65,6 +71,8 @@ export default function Home() {
             <ExperienceTimeline />
             <Curve label="About" />
             <About />
+            <Curve label="Stack" />
+            <TechStack />
             <Curve label="Contact" />
             <Contact />
         </main>

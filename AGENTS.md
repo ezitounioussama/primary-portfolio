@@ -61,12 +61,13 @@ src/
     hero/parallax-hero.jsx   # 3D mouse-parallax holographic orb + editorial chrome
     transitions/curve.jsx    # velocity-reactive bezier divider between sections
     experience/timeline.jsx  # Aceternity Timeline (scroll-beam) ported to GSAP
-    sections/about.jsx       # parallax + word-by-word reveal
+    sections/about.jsx       # Halpin-style intro — 3D holographic portrait card, count-up stats, value cards
+    sections/tech-stack.jsx  # glassy icon wall — 3D tilt, center-out entrance, category filter
     sections/contact.jsx     # contact form (useActionState → submitContact)
     ui/                      # shadcn primitives (animated-theme-toggler, …)
   lib/
     utils.js               # cn()
-    data.js                # SITE_URL, PROFILE, NAV_ITEMS, STACK, TIMELINE (all resume content)
+    data.js                # SITE_URL, PROFILE, NAV_ITEMS, STACK, TECH_STACK, TIMELINE (all resume content)
 public/
     llms.txt               # /llms.txt — structured site summary for AI agents
 ```
@@ -125,6 +126,23 @@ was ported to GSAP, not the code). When extending, **read the reference with
    ScrollTrigger scrub (start `"top 10%"` → end `"bottom 50%"`, `invalidateOnRefresh`),
    porting Aceternity's Framer `useScroll`/`useTransform`. Driven by `lib/data.js`
    `TIMELINE`. (Replaced the earlier Olivier Larose image-slide gallery.)
+
+6. **About** — personal intro (reference: seanhalpin.xyz/about)
+   → `sections/about.jsx`. "I'm Oussama." greeting with inline accent highlights;
+   the portrait (`public/portrait.png`, 288px — keep display ≤ native size) is a
+   **holographic trading card**: iridescent ring + halo, cursor-tracking 3D tilt,
+   glare sweep (`xPercent/yPercent` on an oversized radial overlay), and orbit
+   chips floating at `data-depth` parallax. Stats count up once (`snap`, `once`);
+   value cards tilt individually. Content in `lib/data.js` `ABOUT`.
+
+7. **Tech stack** — glassy icon wall (reference: red1-for-hek.vercel.app)
+   → `sections/tech-stack.jsx`. Tiles from `lib/data.js` `TECH_STACK` with brand
+   icons off the simple-icons CDN (`https://cdn.simpleicons.org/<slug>` — verify a
+   slug 200s before adding; AWS is not available). Center-out `back.out` entrance,
+   3D wall tilt toward the cursor (`quickTo` rotationX/Y under `[perspective]`),
+   randomized idle bob, and category chips (JS / PHP / Data / DB / DevOps) that dim
+   non-matching tiles **in place** (opacity+scale tween, no reflow). Hover lift
+   lives on an inner node (CSS) so it never fights GSAP transforms on the tile.
 
 ### Animation conventions — GSAP skills
 Follow the official **GSAP skills** (`greensock/gsap-skills`): `gsap-react`,

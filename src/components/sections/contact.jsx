@@ -130,14 +130,6 @@ export default function Contact() {
                     >
                         LinkedIn
                     </a>
-                    <a
-                        href={PROFILE.site}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="transition-colors hover:text-foreground"
-                    >
-                        gotodev.ma
-                    </a>
                 </div>
                 <div className="flex flex-wrap items-center justify-between gap-2">
                     <span>
