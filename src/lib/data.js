@@ -158,6 +158,15 @@ export const ABOUT = {
 export const TIMELINE = [
     {
         period: "2023 — Now",
+        tags: [
+            "React",
+            "Next.js 15",
+            "TypeScript",
+            "Symfony",
+            "NestJS",
+            "Docker",
+            "GitHub Actions",
+        ],
         role: "Senior Software Engineer & Technical Lead",
         org: "Intelcia Tech · Rabat",
         points: [
@@ -170,6 +179,14 @@ export const TIMELINE = [
     },
     {
         period: "2022 — Now",
+        tags: [
+            "Next.js",
+            "Vue.js",
+            "Laravel",
+            "React Native",
+            "PostgreSQL",
+            "Redis",
+        ],
         role: "Freelance Full-Stack Engineer",
         org: "Independent · Morocco",
         points: [
@@ -182,6 +199,7 @@ export const TIMELINE = [
     },
     {
         period: "2023 — 2024",
+        tags: ["Python", "Pandas", "Scikit-learn", "Data Viz"],
         role: "Data Science Instructor",
         org: "GoMyCode · Rabat",
         points: [
@@ -190,6 +208,7 @@ export const TIMELINE = [
     },
     {
         period: "Education",
+        tags: ["Woolf University", "MIAGE", "ALX", "Hedera"],
         role: "M.Sc. Computer Science · MIAGE",
         org: "Woolf University (EU) · Université Mohammed V",
         points: [
