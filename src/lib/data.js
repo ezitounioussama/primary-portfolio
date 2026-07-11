@@ -8,9 +8,16 @@ export const SITE_URL =
 
 export const PROFILE = {
     name: "Oussama Ezitouni",
-    // Common misspellings/variants — fed to JSON-LD alternateName + keywords
-    // so searches with the wrong spelling still resolve to this site.
+    // Name variants — fed to JSON-LD alternateName + keywords so searches
+    // with any ordering, spacing, or misspelling still resolve to this site.
     alternateNames: [
+        // Reversed order (family name first — common in Morocco)
+        "Ezitouni Oussama",
+        "Zitouni Oussama",
+        // No-space / handle forms (matches email + GitHub + LinkedIn handles)
+        "oussamaezitouni",
+        "ezitounioussama",
+        // Misspellings
         "Oussama Zitouni",
         "Oussama Ezzitouni",
         "Ousama Ezitouni",
