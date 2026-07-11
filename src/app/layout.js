@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import FloatingDock from "@/components/nav/floating-dock";
 import SmoothScroll from "@/components/smooth-scroll";
@@ -133,6 +134,7 @@ export default function RootLayout({ children }) {
                     variant="circle"
                     className="fixed right-6 top-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/60 text-foreground shadow-lg backdrop-blur-xl transition-colors hover:bg-foreground/10 [&>svg]:h-5 [&>svg]:w-5"
                 />
+                <Analytics />
             </body>
         </html>
     );
