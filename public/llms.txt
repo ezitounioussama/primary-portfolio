@@ -16,7 +16,7 @@ Languages: Arabic (native), English (C1), French (B2)
 
 ## About
 
-- [About Oussama](https://oussamaezitouni.com/#about): Results-driven senior
+- [About Oussama](https://oussama-ezitouni.com/#about): Results-driven senior
   full-stack engineer who owns the full SDLC — from requirements and system
   design to production deployment and performance optimization. Started in the
   backend and moved into creating fast, expressive frontend and 3D web
@@ -25,7 +25,7 @@ Languages: Arabic (native), English (C1), French (B2)
 
 ## Experience
 
-- [Experience timeline](https://oussamaezitouni.com/#experience): Senior
+- [Experience timeline](https://oussama-ezitouni.com/#experience): Senior
   Software Engineer & Technical Lead at Intelcia Tech, Rabat (2023–present) —
   React / Next.js 15 / TypeScript frontends (40% perf gains, 10x traffic), PHP
   (Symfony, PRADO) + Node.js (NestJS, Fastify) backends and microservices,
@@ -39,7 +39,7 @@ Languages: Arabic (native), English (C1), French (B2)
 
 ## Skills
 
-- [Tech stack](https://oussamaezitouni.com/#stack): JavaScript (ES6+),
+- [Tech stack](https://oussama-ezitouni.com/#stack): JavaScript (ES6+),
   TypeScript, PHP, Python, SQL, Bash. Frontend: React 19, Next.js 15, Vue.js,
   Angular, Svelte 5, Tailwind CSS, GSAP. Backend: Node.js, Express, NestJS,
   Fastify, Symfony, Laravel, REST, GraphQL, tRPC. Data: PostgreSQL, MySQL,
@@ -56,12 +56,12 @@ Languages: Arabic (native), English (C1), French (B2)
 
 ## Links
 
-- [Home](https://oussamaezitouni.com/): single-page portfolio (Home,
+- [Home](https://oussama-ezitouni.com/): single-page portfolio (Home,
   Experience, About, Stack, Contact)
 - [GitHub](https://github.com/ezitounioussama): 120+ public repositories
 - [LinkedIn](https://www.linkedin.com/in/ezitounioussama): professional profile
 - [GoToDev](https://gotodev.ma): agency site
-- [Contact](https://oussamaezitouni.com/#contact): contact form, or email
+- [Contact](https://oussama-ezitouni.com/#contact): contact form, or email
   ezitounioussama@gmail.com
 
 ## Notes for agents

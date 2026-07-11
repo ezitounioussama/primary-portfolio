@@ -4,7 +4,7 @@
 // environment for the real domain; the fallback is a placeholder — update it.
 export const SITE_URL =
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-    "https://oussamaezitouni.com";
+    "https://oussama-ezitouni.com";
 
 export const PROFILE = {
     name: "Oussama Ezitouni",
