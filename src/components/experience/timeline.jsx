@@ -9,184 +9,244 @@ import { TIMELINE } from "@/lib/data";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
+// Ghost numeral behind each panel: item.ghost override, else the year,
+// else the first 3 letters ("Education" → "EDU").
+function ghostLabel(item) {
+    if (item.ghost) return item.ghost;
+    const year = /^\d{4}/.exec(item.period)?.[0];
+    return year ?? item.period.slice(0, 3).toUpperCase();
+}
+
 /**
- * Experience timeline — Aceternity "Timeline" DNA, reworked to respond
- * continuously to scroll:
+ * Experience — pinned horizontal journey (Dribbble "Timeline Design" carousel
+ * idea, pushed further):
  *
- * - Gradient beam grows with a scrub; a glowing comet rides its tip.
- * - Each entry reveals individually as it arrives (blur → sharp card,
- *   bullets stagger in) instead of everything at once.
- * - Focus lens: the entry in the reading zone is full-strength (bright node,
- *   glowing card border, brightened period label); the rest sit dimmed.
- *   Dimming lives on a dedicated inner node (CSS transition via
- *   group-[.is-active]) so it never fights GSAP's inline entrance styles.
- * - Sticky period labels; ARKON particle planet behind everything.
+ * - The section pins; vertical scroll drags the track horizontally
+ *   (ease "none" on the container tween — required for containerAnimation),
+ *   and each era snaps into place.
+ * - Multi-speed parallax: ghost year numerals drift faster than their cards
+ *   (fromTo x, scrubbed via containerAnimation) while the particle globe
+ *   sweeps on its own slower schedule behind everything.
+ * - A dotted rail fills with a gradient as you advance; a comet rides the
+ *   fill tip; year nodes + cards light up via the focus lens
+ *   (containerAnimation triggers toggling `is-active`; the dimmer is a
+ *   dedicated inner node so it never fights GSAP inline styles).
+ * - prefers-reduced-motion: no pin, no tweens — the track becomes a native
+ *   horizontally scrollable row (motion-reduce utilities restore full
+ *   opacity/fill).
  */
 export default function ExperienceTimeline() {
-    const containerRef = useRef(null);
-    const entriesRef = useRef(null);
-    const beamRef = useRef(null);
+    const sectionRef = useRef(null);
+    const trackRef = useRef(null);
+    const fillRef = useRef(null);
 
     useGSAP(
         () => {
-            // Beam fill, scrubbed across the section (Aceternity's
-            // useScroll ["start 10%", "end 50%"] equivalent).
+            const reduced = window.matchMedia(
+                "(prefers-reduced-motion: reduce)",
+            ).matches;
+            if (reduced) return; // CSS fallback: native horizontal scroll
+
+            const track = trackRef.current;
+            const distance = () =>
+                Math.max(0, track.scrollWidth - window.innerWidth);
+
+            // Container tween: vertical scroll → horizontal travel. Pin the
+            // section, animate the inner track (never the pinned element).
+            const scrollTween = gsap.to(track, {
+                x: () => -distance(),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    pin: true,
+                    scrub: 1,
+                    start: "top top",
+                    end: () => `+=${distance()}`,
+                    snap: {
+                        snapTo: 1 / (TIMELINE.length - 1),
+                        duration: 0.45,
+                        delay: 0.05,
+                        ease: "power1.inOut",
+                        // Nearest, not directional: tiny scrolls must not
+                        // auto-advance a whole panel (feels like hijacking).
+                        directional: false,
+                    },
+                    invalidateOnRefresh: true,
+                },
+            });
+
+            // Progress rail fill (same scroll range, scrubbed).
             gsap.fromTo(
-                beamRef.current,
-                { height: 0, autoAlpha: 0 },
+                fillRef.current,
+                { scaleX: 0 },
                 {
-                    height: () => entriesRef.current.offsetHeight,
-                    autoAlpha: 1,
+                    scaleX: 1,
                     ease: "none",
                     scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: "top 10%",
-                        end: "bottom 50%",
-                        scrub: true,
+                        trigger: sectionRef.current,
+                        start: "top top",
+                        end: () => `+=${distance()}`,
+                        scrub: 1,
                         invalidateOnRefresh: true,
                     },
                 },
             );
 
-            for (const entry of gsap.utils.toArray(
-                ".timeline-entry",
-                entriesRef.current,
-            )) {
-                // Card reveals as *this* entry arrives: rise + blur → sharp.
-                gsap.from(entry.querySelector(".timeline-card"), {
-                    y: 64,
+            for (const panel of gsap.utils.toArray(".tl-panel", track)) {
+                // Card entrance as the panel rides in from the right.
+                gsap.from(panel.querySelector(".tl-card"), {
+                    y: 70,
                     opacity: 0,
-                    filter: "blur(10px)",
-                    duration: 0.9,
+                    filter: "blur(8px)",
+                    duration: 0.8,
                     ease: "power3.out",
                     scrollTrigger: {
-                        trigger: entry,
-                        start: "top 80%",
+                        containerAnimation: scrollTween,
+                        trigger: panel,
+                        start: "left 88%",
                         once: true,
                     },
                 });
 
-                // Bullets + tags cascade in just after the card.
-                gsap.from(entry.querySelectorAll("li, .timeline-tag"), {
-                    x: 28,
-                    opacity: 0,
-                    duration: 0.5,
-                    ease: "power2.out",
-                    stagger: 0.06,
-                    scrollTrigger: {
-                        trigger: entry,
-                        start: "top 70%",
-                        once: true,
+                // Ghost numeral parallax: drifts opposite/faster than cards.
+                gsap.fromTo(
+                    panel.querySelector(".tl-ghost"),
+                    { x: 110, rotationY: 32, transformPerspective: 700 },
+                    {
+                        x: -110,
+                        rotationY: -32,
+                        ease: "none",
+                        scrollTrigger: {
+                            containerAnimation: scrollTween,
+                            trigger: panel,
+                            start: "left right",
+                            end: "right left",
+                            scrub: true,
+                        },
                     },
-                });
+                );
 
-                // Focus lens: generous zone so one entry is almost always lit.
+                // Focus lens: bright while crossing the center zone.
                 ScrollTrigger.create({
-                    trigger: entry,
-                    start: "top 60%",
-                    end: "bottom 25%",
-                    toggleClass: { targets: entry, className: "is-active" },
+                    containerAnimation: scrollTween,
+                    trigger: panel,
+                    start: "left 65%",
+                    end: "right 35%",
+                    toggleClass: { targets: panel, className: "is-active" },
                 });
             }
         },
-        { scope: containerRef },
+        { scope: sectionRef },
     );
 
     return (
-        <section id="experience" ref={containerRef} className="relative w-full">
-            {/* Dotted 3D particle planet — sweeps in from the hero, rotates with scroll */}
-            <ParticleGlobe triggerRef={containerRef} />
+        <section id="experience" ref={sectionRef} className="relative w-full">
+            {/* Dotted 3D particle planet — deep background layer */}
+            <ParticleGlobe triggerRef={sectionRef} />
 
-            {/* Legibility veil: softens particles behind the reading column */}
+            {/* Legibility veil between planet and content */}
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(90%_70%_at_35%_45%,var(--background)_0%,transparent_70%)] opacity-45 dark:opacity-30"
+                className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(90%_70%_at_40%_50%,var(--background)_0%,transparent_72%)] opacity-45 dark:opacity-30"
             />
 
-            <div className="relative z-10 mx-auto w-full max-w-6xl px-6 md:px-10">
-                <header className="py-16 md:py-24">
-                    <h2 className="max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">
+            {/* Pinned stage */}
+            <div className="relative z-10 flex h-screen flex-col overflow-hidden">
+                <header className="mx-auto w-full max-w-6xl flex-none px-6 pt-12 pb-3 md:px-10 md:pt-20 md:pb-6">
+                    <h2 className="text-3xl font-semibold tracking-tight md:text-6xl">
                         The journey so far
                     </h2>
-                    <p className="mt-4 max-w-md text-muted-foreground">
-                        A timeline of the roles, teams, and products I&apos;ve
-                        built and led.
+                    <p className="mt-3 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                        Scroll to travel
+                        <span aria-hidden="true" className="inline-block">
+                            ⟶
+                        </span>
                     </p>
                 </header>
 
-                <div ref={entriesRef} className="relative pb-16">
-                    {TIMELINE.map((item) => (
+                {/* Track centered in the remaining height (header never clips) */}
+                <div className="flex min-h-0 flex-1 items-center motion-reduce:overflow-x-auto">
+                    <div ref={trackRef} className="relative w-max">
+                        {/* Rail: dotted base + gradient fill + comet tip */}
                         <div
-                            key={`${item.period}-${item.role}`}
-                            className="timeline-entry group flex justify-start pt-10 md:gap-10 md:pt-24"
+                            aria-hidden="true"
+                            className="absolute inset-x-0 top-9 border-t-2 border-dashed border-border"
+                        />
+                        <div
+                            ref={fillRef}
+                            aria-hidden="true"
+                            className="absolute left-0 top-9 h-[2px] w-full origin-left -translate-y-px scale-x-0 bg-gradient-to-r from-accent-5 via-accent-4 to-accent-3 shadow-[0_0_16px_-2px_var(--accent-4)] motion-reduce:scale-x-100"
                         >
-                            {/* Sticky period label + node */}
-                            <div className="sticky top-32 z-40 flex max-w-xs flex-col items-center self-start md:w-full md:flex-row lg:max-w-sm">
-                                <div className="absolute left-2 flex h-10 w-10 items-center justify-center rounded-full bg-background md:left-2">
-                                    <div className="h-3 w-3 rounded-full border border-border bg-muted transition-all duration-500 group-[.is-active]:scale-125 group-[.is-active]:border-accent-4 group-[.is-active]:bg-accent-4 group-[.is-active]:shadow-[0_0_14px_var(--accent-4)]" />
-                                </div>
-                                <p className="hidden origin-left font-mono text-xl font-bold text-muted-foreground transition-all duration-500 md:block md:pl-16 md:text-4xl group-[.is-active]:scale-105 group-[.is-active]:text-foreground">
-                                    {item.period}
-                                </p>
-                            </div>
-
-                            {/* Glass card (GSAP animates this node's entrance) */}
-                            <div className="relative w-full pl-16 pr-2 md:pl-4">
-                                <div className="timeline-card rounded-2xl border border-border bg-background/50 p-6 backdrop-blur-md transition-[border-color,box-shadow] duration-500 md:p-8 group-[.is-active]:border-accent-4/40 group-[.is-active]:shadow-[0_0_48px_-20px_var(--accent-4)]">
-                                    {/* Focus-lens dimmer (CSS-only, separate from GSAP) */}
-                                    <div className="opacity-50 transition-opacity duration-500 group-[.is-active]:opacity-100">
-                                        <p className="mb-1 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground md:hidden">
-                                            {item.period}
-                                        </p>
-                                        <h3 className="text-xl font-semibold tracking-tight md:text-2xl">
-                                            {item.role}
-                                        </h3>
-                                        <p className="mt-1 text-sm text-muted-foreground">
-                                            {item.org}
-                                        </p>
-                                        <ul className="mt-5 space-y-3">
-                                            {item.points.map((point) => (
-                                                <li
-                                                    key={point}
-                                                    className="flex gap-3 text-sm leading-relaxed text-muted-foreground md:text-base"
-                                                >
-                                                    <span
-                                                        aria-hidden="true"
-                                                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-4"
-                                                    />
-                                                    <span>{point}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                        {item.tags ? (
-                                            <div className="mt-6 flex flex-wrap gap-2">
-                                                {item.tags.map((tag) => (
-                                                    <span
-                                                        key={tag}
-                                                        className="timeline-tag rounded-full border border-border bg-foreground/5 px-3 py-1 font-mono text-[11px] text-muted-foreground"
-                                                    >
-                                                        {tag}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        ) : null}
-                                    </div>
-                                </div>
-                            </div>
+                            <span className="absolute right-0 top-1/2 h-2.5 w-2.5 -translate-y-1/2 translate-x-1/2 rounded-full bg-accent-4 shadow-[0_0_14px_3px_var(--accent-4)]" />
                         </div>
-                    ))}
 
-                    {/* Beam track (static gradient, masked) + animated fill + comet tip */}
-                    <div className="absolute left-7 top-0 h-full w-[2px] bg-gradient-to-b from-transparent via-border to-transparent [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
-                        <div
-                            ref={beamRef}
-                            className="absolute inset-x-0 top-0 w-[2px] rounded-full bg-gradient-to-t from-accent-5 via-accent-4 to-transparent shadow-[0_0_16px_-2px_var(--accent-4)]"
-                        >
-                            {/* Comet riding the beam tip */}
-                            <span
-                                aria-hidden="true"
-                                className="absolute bottom-0 left-1/2 h-2.5 w-2.5 -translate-x-1/2 translate-y-1/2 rounded-full bg-accent-4 shadow-[0_0_14px_3px_var(--accent-4)]"
-                            />
+                        <div className="flex gap-10 px-[8vw] md:gap-20 md:px-[16vw]">
+                            {TIMELINE.map((item) => (
+                                <article
+                                    key={`${item.period}-${item.role}`}
+                                    className="tl-panel group relative w-[82vw] max-w-xl shrink-0 pt-14 sm:w-[70vw] md:w-[34rem] md:pt-24"
+                                >
+                                    {/* Ghost numeral (parallax layer) */}
+                                    <span
+                                        aria-hidden="true"
+                                        className="tl-ghost pointer-events-none absolute -top-8 left-0 select-none font-mono text-[4.5rem] font-bold leading-none tracking-tighter text-foreground opacity-[0.06] transition-opacity duration-500 md:text-[9rem] group-[.is-active]:opacity-[0.12]"
+                                    >
+                                        {ghostLabel(item)}
+                                    </span>
+
+                                    {/* Node on the rail */}
+                                    <span
+                                        aria-hidden="true"
+                                        className="absolute left-0 top-9 flex h-8 w-8 -translate-x-1 -translate-y-1/2 items-center justify-center rounded-full bg-background"
+                                    >
+                                        <span className="h-3 w-3 rounded-full border border-border bg-muted transition-all duration-500 group-[.is-active]:scale-125 group-[.is-active]:border-accent-4 group-[.is-active]:bg-accent-4 group-[.is-active]:shadow-[0_0_14px_var(--accent-4)]" />
+                                    </span>
+
+                                    {/* Period tag near the node */}
+                                    <p className="absolute left-8 top-9 -translate-y-1/2 font-mono text-sm font-bold text-muted-foreground transition-colors duration-500 group-[.is-active]:text-foreground md:text-base">
+                                        {item.period}
+                                    </p>
+
+                                    {/* Glass card */}
+                                    <div className="tl-card rounded-2xl border border-border bg-background/50 p-4 backdrop-blur-md transition-[border-color,box-shadow] duration-500 md:p-8 group-[.is-active]:border-accent-4/40 group-[.is-active]:shadow-[0_0_48px_-20px_var(--accent-4)]">
+                                        {/* Focus-lens dimmer (CSS-only, separate from GSAP) */}
+                                        <div className="opacity-50 transition-opacity duration-500 group-[.is-active]:opacity-100 motion-reduce:opacity-100">
+                                            <h3 className="text-xl font-semibold tracking-tight md:text-2xl">
+                                                {item.role}
+                                            </h3>
+                                            <p className="mt-1 text-sm text-muted-foreground">
+                                                {item.org}
+                                            </p>
+                                            <ul className="mt-4 space-y-2 md:mt-5 md:space-y-2.5">
+                                                {item.points.map((point) => (
+                                                    <li
+                                                        key={point}
+                                                        className="flex gap-2.5 text-[13px] leading-snug text-muted-foreground md:gap-3 md:text-sm md:leading-relaxed"
+                                                    >
+                                                        <span
+                                                            aria-hidden="true"
+                                                            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-4"
+                                                        />
+                                                        <span>{point}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            {item.tags ? (
+                                                <div className="mt-4 flex flex-wrap gap-1.5 md:mt-5 md:gap-2">
+                                                    {item.tags.map((tag) => (
+                                                        <span
+                                                            key={tag}
+                                                            className="rounded-full border border-border bg-foreground/5 px-2.5 py-0.5 font-mono text-[10px] text-muted-foreground md:px-3 md:py-1 md:text-[11px]"
+                                                        >
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            ) : null}
+                                        </div>
+                                    </div>
+                                </article>
+                            ))}
                         </div>
                     </div>
                 </div>

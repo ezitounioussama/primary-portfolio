@@ -102,16 +102,45 @@ export default function TechStack() {
                 duration: 0.8,
                 ease: "power3.out",
             });
+            // Proximity pop: tiles near the cursor rise out of the wall
+            // (dock-magnify idea, subtle). Scale lives on the inner node so it
+            // never fights the tile-level entrance/filter tweens.
+            const POP_RANGE = 150;
+            const popSetters = tiles.map((tile) => ({
+                el: tile.firstElementChild,
+                sTo: gsap.quickTo(tile.firstElementChild, "scale", {
+                    duration: 0.35,
+                    ease: "power2.out",
+                }),
+                zTo: gsap.quickTo(tile.firstElementChild, "z", {
+                    duration: 0.35,
+                    ease: "power2.out",
+                }),
+            }));
             const onMove = contextSafe((e) => {
                 const rect = sectionRef.current.getBoundingClientRect();
                 const nx = (e.clientX - rect.left) / rect.width - 0.5;
                 const ny = (e.clientY - rect.top) / rect.height - 0.5;
                 rotY(nx * 10);
                 rotX(-ny * 10);
+                for (const { el, sTo, zTo } of popSetters) {
+                    const r = el.getBoundingClientRect();
+                    const d = Math.hypot(
+                        e.clientX - (r.left + r.width / 2),
+                        e.clientY - (r.top + r.height / 2),
+                    );
+                    const t = Math.max(0, 1 - d / POP_RANGE);
+                    sTo(1 + t * 0.09);
+                    zTo(t * 26);
+                }
             });
             const onLeave = contextSafe(() => {
                 rotX(0);
                 rotY(0);
+                for (const { sTo, zTo } of popSetters) {
+                    sTo(1);
+                    zTo(0);
+                }
             });
 
             const section = sectionRef.current;
@@ -185,17 +214,28 @@ export default function TechStack() {
                                 data-category={t.category}
                                 className="tech-tile"
                             >
-                                {/* Inner node owns hover lift so it never fights GSAP transforms */}
-                                <div className="group flex h-24 w-24 flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-background/40 shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:border-foreground/30 hover:bg-foreground/10 hover:shadow-xl">
-                                    {/* biome-ignore lint/performance/noImgElement: tiny external CDN brand icons; next/image adds no value here */}
-                                    <img
-                                        src={`https://cdn.simpleicons.org/${t.icon}`}
-                                        alt=""
-                                        width={32}
-                                        height={32}
-                                        loading="lazy"
-                                        className="h-8 w-8 opacity-80 grayscale-25 transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
-                                    />
+                                {/* Inner node owns hover styling + GSAP pop/bob (lift is GSAP-driven) */}
+                                <div className="group flex h-24 w-24 flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-background/40 shadow-lg backdrop-blur-md transition-[border-color,background-color,box-shadow] duration-300 hover:border-foreground/30 hover:bg-foreground/10 hover:shadow-xl">
+                                    {t.icon ? (
+                                        /* biome-ignore lint/performance/noImgElement: tiny external CDN brand icons; next/image adds no value here */
+                                        <img
+                                            src={`https://cdn.simpleicons.org/${t.icon}`}
+                                            alt=""
+                                            width={32}
+                                            height={32}
+                                            loading="lazy"
+                                            className="h-8 w-8 opacity-80 grayscale-25 transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+                                        />
+                                    ) : (
+                                        /* Letter badge for tools without a simple-icons slug (e.g. PRADO) */
+                                        <span
+                                            aria-hidden="true"
+                                            className="flex h-8 w-8 items-center justify-center rounded-lg font-mono text-sm font-bold text-background"
+                                            style={{ background: IRIDESCENT }}
+                                        >
+                                            {t.initials}
+                                        </span>
+                                    )}
                                     <span className="px-1 text-center font-mono text-[10px] leading-tight text-muted-foreground transition-colors group-hover:text-foreground">
                                         {t.name}
                                     </span>

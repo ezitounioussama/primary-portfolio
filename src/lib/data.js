@@ -95,6 +95,7 @@ export const TECH_STACK = [
     // PHP ecosystem
     { name: "PHP", icon: "php", category: "php" },
     { name: "Symfony", icon: "symfony", category: "php" },
+    { name: "PRADO", initials: "PR", category: "php" },
     { name: "Laravel", icon: "laravel", category: "php" },
     // Data science
     { name: "Python", icon: "python", category: "data" },
@@ -128,7 +129,7 @@ export const TECH_STACK = [
 export const ABOUT = {
     greeting: "I'm Oussama.",
     intro: "A senior full-stack engineer at Intelcia Tech.",
-    bio: "Software engineer and data scientist at heart — for the past 3 years I've been architecting enterprise platforms at Intelcia Tech that serve millions of users, and shipping freelance web, mobile, and AI products on the side. When I'm not shipping, I'm writing on DEV.to or mentoring the next wave of engineers.",
+    bio: "Software engineer and data scientist at heart — for the past 3 years at Intelcia Tech I've been the engineer who touches everything: architecture, backends, frontends, and the pipelines that keep them honest, on platforms serving millions of users. On the side I ship freelance products, teach an international master's cohort at Woolf University, and write about all of it on DEV.to.",
     availability: "Available for freelance",
     stats: [
         { value: 3, suffix: "+", label: "Years building" },
@@ -150,7 +151,7 @@ export const ABOUT = {
         {
             icon: "graduation",
             title: "Teach & multiply",
-            body: "Mentored 5+ engineers and taught data science cohorts at GoMyCode. Knowledge shared is leverage gained.",
+            body: "From data science cohorts at GoMyCode to master's students at Woolf University — plus 5+ engineers mentored at work. Knowledge shared is leverage gained.",
         },
     ],
     // Floating chips orbiting the portrait (label + parallax depth).
@@ -163,26 +164,29 @@ export const ABOUT = {
 };
 
 // Career + education journey, rendered by the timeline section.
+// `ghost` overrides the big parallax numeral (defaults to the year / 3 letters).
 export const TIMELINE = [
     {
         period: "2023 — Now",
-        tags: [
-            "React",
-            "Next.js 15",
-            "TypeScript",
-            "Symfony",
-            "NestJS",
-            "Docker",
-            "GitHub Actions",
-        ],
+        tags: ["React", "Next.js", "TypeScript", "Symfony", "PRADO", "Docker"],
         role: "Senior Software Engineer & Technical Lead",
         org: "Intelcia Tech · Rabat",
         points: [
-            "Architected React / Next.js 15 / TypeScript frontends for enterprise platforms — 40% performance gains and 10× traffic capacity.",
-            "Led PHP (Symfony, PRADO) and Node.js (NestJS, Fastify) backends: REST APIs, database schemas, and microservices serving millions of users.",
-            "Built Docker-based environments and GitHub Actions CI/CD to standardize deployments across distributed teams.",
-            "Refactored legacy PHP/JS codebases for national-scale deployments across 50+ institutions.",
-            "Drove code reviews and mentored 5+ junior engineers through structured onboarding and pair programming.",
+            "The engineer teams call when it matters — I own the platform end to end: architecture, data, APIs, frontend, pipelines. Millions of users, 50+ institutions.",
+            "Rebuilt enterprise frontends in React / Next.js / TypeScript — 40% faster loads and 10× the traffic headroom.",
+            "Modernized national-scale PHP (Symfony, PRADO) and Node.js (NestJS, Fastify) backends without a minute of downtime.",
+        ],
+    },
+    {
+        period: "2023 — 2024",
+        ghost: "MSc",
+        tags: ["Software Architecture", "Web Engineering", "Mentorship"],
+        role: "Instructor — International M.Sc. Computer Science",
+        org: "Woolf University (EU) · Remote",
+        points: [
+            "Teach software engineering to an international master's cohort — the same architecture, testing, and system-design practices I use in production every day.",
+            "Supervise student projects from first commit to defended thesis.",
+            "Wrote the course material on modern web engineering: React, APIs, databases, and DevOps.",
         ],
     },
     {
@@ -198,31 +202,45 @@ export const TIMELINE = [
         role: "Freelance Full-Stack Engineer",
         org: "Independent · Morocco",
         points: [
-            "Shipped 12+ web & mobile apps for clients across industries (React, Next.js, Vue, Node.js, Laravel, Symfony, React Native).",
-            "Owned system architecture, database design (PostgreSQL, MongoDB, Redis), APIs, frontend, DevOps, and cloud deployment end to end.",
-            "Built Nlivrilik — real-time last-mile logistics with GPS tracking, driver routing, and multi-role dashboards (Next.js, Node.js, PostgreSQL).",
-            "Delivered Aksam Assurance, Paylik, HoussniJob, Ibn Tofail University, and Jadara Foundation.",
-            "Maintain a developer toolkit suite and CLI with 100+ weekly npm downloads.",
+            "Shipped 12+ web & mobile products across logistics, fintech, insurance, recruitment, and education.",
+            "Built Nlivrilik — real-time last-mile delivery with GPS tracking, driver routing, and multi-role dashboards (Next.js, Node.js, PostgreSQL).",
+            "Every project is mine end to end: architecture, database, APIs, UI, deployment.",
+            "Maintain a developer toolkit and CLI with 100+ weekly npm downloads.",
         ],
     },
     {
         period: "2023 — 2024",
+        ghost: "DATA",
         tags: ["Python", "Pandas", "Scikit-learn", "Data Viz"],
         role: "Data Science Instructor",
         org: "GoMyCode · Rabat",
         points: [
-            "Taught Data Science & ML (Python, Pandas, Scikit-learn, visualization, predictive modeling) to cohorts of 5–10 students.",
+            "Taught Data Science & ML to cohorts of 5–10 — from their first notebook to working predictive models.",
+            "Built a hands-on curriculum around real datasets, not toy examples.",
+        ],
+    },
+    {
+        period: "2022 — Now",
+        ghost: "TALK",
+        tags: ["Speaking", "Writing", "Hackathons"],
+        role: "Talks, writing & community",
+        org: "Morocco & remote",
+        points: [
+            "Internal engineering talks at Intelcia — from taming legacy PHP to shipping motion without killing performance.",
+            "Mentor and jury at student hackathons around Rabat.",
+            "Technical writer on DEV.to since 2022 — 120+ public repos on GitHub.",
         ],
     },
     {
         period: "Education",
+        ghost: "EDU",
         tags: ["Woolf University", "MIAGE", "ALX", "Hedera"],
         role: "M.Sc. Computer Science · MIAGE",
         org: "Woolf University (EU) · Université Mohammed V",
         points: [
             "M.Sc. Computer Science (Bac+5) — Woolf University, EU-accredited (in progress).",
-            "Licence MIAGE (Bac+3, European Bachelor) and DUT MIAGE (Bac+2).",
-            "Certified JavaScript Developer (Orange), ALX Software Engineering & Data Science, Certified Hedera Blockchain Developer.",
+            "Licence MIAGE (European Bachelor) & DUT MIAGE — Université Mohammed V, Rabat.",
+            "Certified: JavaScript (Orange), ALX Software Engineering & Data Science, Hedera Blockchain Developer.",
         ],
     },
 ];

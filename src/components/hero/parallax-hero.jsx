@@ -144,6 +144,31 @@ export default function ParallaxHero() {
             {/* Ground + vignette */}
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_-10%,transparent_40%,color-mix(in_oklch,var(--foreground)_8%,transparent)_100%)]" />
 
+            {/* Star dust — two depth layers picked up by the [data-depth] parallax.
+                Dots are box-shadows in currentColor so they adapt to the theme. */}
+            <div className="pointer-events-none absolute inset-0 text-foreground">
+                <div data-depth="10" className="absolute inset-0 opacity-25">
+                    <span
+                        aria-hidden="true"
+                        className="absolute h-px w-px rounded-full"
+                        style={{
+                            boxShadow:
+                                "8vw 12vh 0 1px, 22vw 28vh 0 0.5px, 15vw 68vh 0 1px, 30vw 84vh 0 0.5px, 44vw 8vh 0 1px, 58vw 20vh 0 0.5px, 70vw 6vh 0 1px, 83vw 26vh 0 0.5px, 92vw 14vh 0 1px, 76vw 58vh 0 0.5px, 88vw 74vh 0 1px, 64vw 88vh 0 0.5px, 38vw 46vh 0 0.5px, 6vw 44vh 0 1px, 95vw 48vh 0 0.5px, 52vw 76vh 0 1px, 12vw 90vh 0 0.5px, 47vw 92vh 0 1px",
+                        }}
+                    />
+                </div>
+                <div data-depth="28" className="absolute inset-0 opacity-40">
+                    <span
+                        aria-hidden="true"
+                        className="absolute h-[2px] w-[2px] rounded-full"
+                        style={{
+                            boxShadow:
+                                "18vw 16vh 0 1px, 78vw 10vh 0 0.5px, 90vw 38vh 0 1px, 26vw 74vh 0 0.5px, 60vw 64vh 0 1px, 8vw 30vh 0 0.5px, 41vw 22vh 0 1px, 85vw 84vh 0 0.5px, 68vw 40vh 0 1px, 33vw 6vh 0 0.5px",
+                        }}
+                    />
+                </div>
+            </div>
+
             {/* Parallax scene (gets tilted) */}
             <div
                 ref={sceneRef}

@@ -28,13 +28,18 @@ Languages: Arabic (native), English (C1), French (B2)
 
 - [Experience timeline](https://oussama-ezitouni.com/#experience): Senior
   Software Engineer & Technical Lead at Intelcia Tech, Rabat (2023–present) —
-  React / Next.js 15 / TypeScript frontends (40% perf gains, 10x traffic), PHP
-  (Symfony, PRADO) + Node.js (NestJS, Fastify) backends and microservices,
-  Docker + GitHub Actions CI/CD, mentors 5+ engineers. Freelance full-stack
-  engineer (2022–present) — 12+ web & mobile apps including Nlivrilik
-  (real-time last-mile logistics), Aksam Assurance, Paylik, HoussniJob, Ibn
-  Tofail University, Jadara Foundation. Data Science Instructor at GoMyCode,
-  Rabat (2023–2024).
+  owns platforms end to end (architecture, data models, APIs, frontend,
+  CI/CD) serving millions of users across 50+ institutions; React / Next.js /
+  TypeScript frontends (40% perf gains, 10x traffic), PHP (Symfony, PRADO) +
+  Node.js (NestJS, Fastify) backends and microservices, mentors 5+ engineers.
+  Instructor for an international M.Sc. Computer Science program at Woolf
+  University (2023–2024) — software engineering, architecture, and thesis
+  supervision. Freelance full-stack engineer (2022–present) — 12+ web &
+  mobile apps including Nlivrilik (real-time last-mile logistics), Aksam
+  Assurance, Paylik, HoussniJob, Ibn Tofail University, Jadara Foundation.
+  Data Science Instructor at GoMyCode, Rabat (2023–2024). Speaker at internal
+  Intelcia engineering talks; hackathon mentor and jury; technical writer on
+  DEV.to since 2022.
 - Affiliation: co-founder of [GoToDev](https://gotodev.ma), a Moroccan web &
   mobile development agency.
 

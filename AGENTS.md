@@ -125,35 +125,46 @@ was ported to GSAP, not the code). When extending, **read the reference with
    → `transitions/curve.jsx`. Control point pushed by `self.getVelocity()`, springs
    back with `elastic.out`. Reused between every section in `page.js`.
 
-5. **Experience** — [Aceternity Timeline](https://ui.aceternity.com/components/timeline)
-   → `experience/timeline.jsx`. Sticky period labels; a gradient beam grows with a
-   ScrollTrigger scrub (start `"top 10%"` → end `"bottom 50%"`, `invalidateOnRefresh`),
-   porting Aceternity's Framer `useScroll`/`useTransform`. Driven by `lib/data.js`
-   `TIMELINE`. (Replaced the earlier Olivier Larose image-slide gallery.)
+5. **Experience** — pinned horizontal journey (reference: Dribbble
+   [Timeline Design](https://dribbble.com/shots/25500168-Timeline-Design)
+   carousel) → `experience/timeline.jsx`. The section **pins** and vertical
+   scroll drags the track horizontally: `gsap.to(track, { x: () => -distance,
+   ease: "none" })` (never animate the pinned element; `ease: "none"` is
+   required for `containerAnimation`) with `scrub: 1`,
+   `end: () => "+=" + distance`, `invalidateOnRefresh`, and **snap** per era —
+   `snapTo: 1/(n-1)` with **`directional: false`** (directional snap
+   auto-advances a panel on entry — feels like scroll hijacking).
+   Child effects hang off the container tween via
+   `scrollTrigger: { containerAnimation: scrollTween, trigger: panel, ... }`
+   with horizontal start/end (`"left 88%"` etc.): card entrance (rise +
+   blur→sharp, `once`), **ghost year-numeral parallax** (fromTo x 110→-110,
+   scrubbed — the multi-speed depth layer), and the **focus lens**
+   (`is-active` toggleClass; children style via `group-[.is-active]:`; the
+   dimmer is a dedicated inner node so CSS opacity never fights GSAP inline
+   styles). A dotted **rail** spans the track with a scrubbed gradient fill
+   (scaleX 0→1) and a **comet** on the tip; year nodes light up when active.
+   Per-role `tags` chips come from `TIMELINE[].tags` in `lib/data.js`.
+   **Responsive:** panels `w-[82vw]` mobile / `34rem` desktop; mobile density
+   is tightened so the tallest card fits a 667px viewport. **Layout gotcha:**
+   the pinned stage must be `flex-col` with the header `flex-none` and the
+   track in `flex-1 min-h-0 items-center` — `justify-center` on the whole
+   stage clips the header off the top on short viewports. Ghost numerals
+   accept an `item.ghost` override (MSc / DATA / TALK / EDU) and turn in 3D
+   (`rotationY` scrub) while traveling.
+   **Reduced motion:** no pin/tweens — the track wrapper is
+   `motion-reduce:overflow-x-auto` (native horizontal scroll) and
+   `motion-reduce:` utilities restore fill/opacity.
    Behind it, `three/particle-globe.jsx` renders an ARKON-style dotted particle
    planet (Fibonacci sphere + halo dust + tilted Saturn-style ring band, soft
-   radial sprite so dots aren't squares) that sweeps in huge from the
-   bottom-right and rotates/drifts on a scrubbed timeline across the whole
-   section. **Scene fog** (color = page background per theme) depth-fades the
-   far side — the GitHub-globe volume trick. Idle spin runs on `gsap.ticker`,
-   added/removed by a viewport-visibility ScrollTrigger; theme handling via a
-   `.dark`-class MutationObserver: dark = additive glow blending, light =
-   normal blending with the material `color` multiplier set to deep indigo
-   (`0x4c4c8a`) so dots stay saturated on white. Static single frame under
-   `prefers-reduced-motion`.
-   DOM side: a radial **legibility veil** sits between canvas and content.
-   Entries are **glass cards** that reveal individually on arrival (rise +
-   blur→sharp; bullets/tags cascade). A **focus lens** keeps the entry in the
-   reading zone lit: each `.timeline-entry` gets `is-active` toggled by a
-   ScrollTrigger (start `top 60%` / end `bottom 25%`) and children style via
-   `group-[.is-active]:` variants (glowing accent node, scaled period label,
-   accent card border/glow). The dimmer is a **dedicated inner node**
-   (CSS-only opacity) so it never fights GSAP's inline entrance styles on
-   `.timeline-card`. The 2px beam carries a glowing **comet** on its tip.
-   Per-role `tags` chips come from `TIMELINE[].tags` in `lib/data.js`.
-   **Gotcha:** the canvas lives in an absolute `overflow-hidden` wrapper
-   *sibling* to the content — the section itself must NOT get
-   `overflow-hidden` or the sticky labels break.
+   radial sprite so dots aren't squares) that sweeps/rotates on its own scrub
+   across the pinned range — the slowest parallax layer. **Scene fog**
+   (color = page background per theme) depth-fades the far side — the
+   GitHub-globe volume trick. Idle spin runs on `gsap.ticker`, gated by a
+   viewport-visibility ScrollTrigger; theme via a `.dark`-class
+   MutationObserver: dark = additive glow, light = normal blending with the
+   material `color` multiplier set to deep indigo (`0x4c4c8a`). Static single
+   frame under `prefers-reduced-motion`. A radial **legibility veil** sits
+   between canvas and content.
 
 6. **About** — personal intro (reference: seanhalpin.xyz/about)
    → `sections/about.jsx`. "I'm Oussama." greeting with inline accent highlights;
@@ -166,7 +177,10 @@ was ported to GSAP, not the code). When extending, **read the reference with
 7. **Tech stack** — glassy icon wall (reference: red1-for-hek.vercel.app)
    → `sections/tech-stack.jsx`. Tiles from `lib/data.js` `TECH_STACK` with brand
    icons off the simple-icons CDN (`https://cdn.simpleicons.org/<slug>` — verify a
-   slug 200s before adding; AWS is not available). Center-out `back.out` entrance,
+   slug 200s before adding; AWS is not available). Tools without a slug (e.g.
+   PRADO) use `initials` instead of `icon` → iridescent letter badge. A
+   cursor-**proximity pop** (per-tile quickTo scale+z on the inner node)
+   replaces the old CSS hover lift, which GSAP's idle bob was overriding. Center-out `back.out` entrance,
    3D wall tilt toward the cursor (`quickTo` rotationX/Y under `[perspective]`),
    randomized idle bob, and category chips (JS / PHP / Data / DB / DevOps) that dim
    non-matching tiles **in place** (opacity+scale tween, no reflow). Hover lift
