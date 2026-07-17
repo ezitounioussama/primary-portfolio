@@ -57,6 +57,8 @@ src/
     sitemap.js             # /sitemap.xml
     robots.js              # /robots.txt (allows Googlebot + AI crawlers, links sitemap)
     not-found.js           # 404 (noindex) → components/not-found-scene.jsx
+    # next.config.mjs sets security headers (nosniff, referrer-policy, frame,
+    # permissions) + poweredByHeader:false — keep when changing config.
   components/
     smooth-scroll.jsx        # Lenis ↔ GSAP ticker ↔ ScrollTrigger provider (client)
     not-found-scene.jsx      # 404 scene — hero-style orb + parallax + "Back home" CTA (CTA stays out of GSAP fades)
@@ -94,7 +96,15 @@ edit copy there, not in components.
 - **OG image** is generated at build by `opengraph-image.js` (`next/og`). Satori
   supports only linear/radial gradients — **no `conic-gradient`** there.
 - Regenerate/verify: `bun run build` emits `/opengraph-image`, `/sitemap.xml`,
-  `/robots.txt`; `/llms.txt` and `/favicon.ico` are static.
+  `/robots.txt`; `/llms.txt`, `/favicon.ico`, `/cv.pdf`, and the IndexNow key
+  file (`public/57bf15…f7.txt`) are static. After deploys, ping
+  `https://api.indexnow.org/indexnow?url=<SITE_URL>&key=<key>` (Bing/Copilot).
+- **Perf gotchas:** About stats must SSR real values (crawlers read them);
+  hero entrance skips when hydration is late (>2s) so slow devices get
+  content-first; Three.js loads via `next/dynamic` `ssr:false` (below-fold);
+  fonts use `display:"optional"` and only Geist Sans preloads. Lab
+  mobile-throttled LCP (~3.5s simulated) is a known simulator artifact —
+  observed LCP is ~180ms; judge by CrUX field data post-deploy.
 
 Keep page sections as composable components in `src/components/`. `page.js` reads
 as a clear top-to-bottom composition of sections.

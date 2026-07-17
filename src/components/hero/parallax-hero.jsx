@@ -32,29 +32,35 @@ export default function ParallaxHero() {
                 "(prefers-reduced-motion: reduce)",
             ).matches;
 
-            // Entrance.
-            gsap.from(".hero-rise", {
-                yPercent: 120,
-                opacity: 0,
-                duration: 1.1,
-                stagger: 0.08,
-                ease: "power4.out",
-            });
-            // Keep entrance fades short: long fades leave semi-transparent
-            // text when audits/users sample the page early.
-            gsap.from(".hero-fade", {
-                opacity: 0,
-                duration: 0.7,
-                stagger: 0.05,
-                delay: 0.1,
-                ease: "power2.out",
-            });
-            gsap.from(".orb-scale", {
-                scale: 0.6,
-                opacity: 0,
-                duration: 1.4,
-                ease: "power3.out",
-            });
+            // Entrance — but only when hydration is prompt. On slow devices
+            // the SSR text has been visible for seconds; hiding it again
+            // re-records LCP at animation time (3s+ on throttled mobile).
+            // Content first, choreography second.
+            const lateHydration = performance.now() > 2000;
+            if (!lateHydration) {
+                gsap.from(".hero-rise", {
+                    yPercent: 120,
+                    opacity: 0,
+                    duration: 1.1,
+                    stagger: 0.08,
+                    ease: "power4.out",
+                });
+                // Keep entrance fades short: long fades leave semi-transparent
+                // text when audits/users sample the page early.
+                gsap.from(".hero-fade", {
+                    opacity: 0,
+                    duration: 0.7,
+                    stagger: 0.05,
+                    delay: 0.1,
+                    ease: "power2.out",
+                });
+                gsap.from(".orb-scale", {
+                    scale: 0.6,
+                    opacity: 0,
+                    duration: 1.4,
+                    ease: "power3.out",
+                });
+            }
 
             if (reduced) return;
 
@@ -215,13 +221,16 @@ export default function ParallaxHero() {
             <div className="pointer-events-none absolute inset-0 flex items-center">
                 <div data-depth="18" className="px-6 md:px-12">
                     <h1 className="leading-[0.82]">
-                        <span className="hero-rise block font-serif text-6xl italic text-foreground sm:text-7xl lg:text-8xl">
-                            Full-stack
+                        <span className="hero-rise block font-serif text-5xl italic text-foreground sm:text-7xl lg:text-8xl">
+                            Senior full-stack
                         </span>
                         <span className="hero-rise block text-6xl font-semibold uppercase tracking-tight text-foreground sm:text-8xl lg:text-[9rem]">
                             Engineer.
                         </span>
                     </h1>
+                    <p className="hero-rise mt-5 font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground lg:hidden">
+                        Morocco · Available for freelance
+                    </p>
                 </div>
             </div>
 
@@ -251,6 +260,13 @@ export default function ParallaxHero() {
                     <p className="text-muted-foreground">
                         Node · Symfony · Laravel
                     </p>
+                    <a
+                        href="/cv.pdf"
+                        download="Oussama-Ezitouni-CV.pdf"
+                        className="pointer-events-auto mt-2 inline-block py-1 text-foreground underline underline-offset-4 transition-colors hover:text-accent-4"
+                    >
+                        Download CV ↓
+                    </a>
                 </div>
                 <nav
                     className="hero-fade hidden flex-col items-end pr-14 md:flex"

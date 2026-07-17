@@ -3,9 +3,16 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import dynamic from "next/dynamic";
 import { useRef } from "react";
-import ParticleGlobe from "@/components/three/particle-globe";
 import { TIMELINE } from "@/lib/data";
+
+// Three.js is heavy and the globe is below the fold — load it after
+// hydration so it never taxes first paint / TBT on mobile.
+const ParticleGlobe = dynamic(
+    () => import("@/components/three/particle-globe"),
+    { ssr: false },
+);
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -231,6 +238,21 @@ export default function ExperienceTimeline() {
                                                     </li>
                                                 ))}
                                             </ul>
+                                            {item.links ? (
+                                                <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1">
+                                                    {item.links.map((l) => (
+                                                        <a
+                                                            key={l.href}
+                                                            href={l.href}
+                                                            target="_blank"
+                                                            rel="noreferrer"
+                                                            className="font-mono text-[11px] text-accent-4 underline underline-offset-4 transition-colors hover:text-foreground"
+                                                        >
+                                                            {l.label} ↗
+                                                        </a>
+                                                    ))}
+                                                </div>
+                                            ) : null}
                                             {item.tags ? (
                                                 <div className="mt-4 flex flex-wrap gap-1.5 md:mt-5 md:gap-2">
                                                     {item.tags.map((tag) => (

@@ -18,6 +18,7 @@ export default function robots() {
                     "OAI-SearchBot",
                     "ClaudeBot",
                     "PerplexityBot",
+                    "Google-Extended",
                 ],
                 allow: "/",
             },

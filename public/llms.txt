@@ -1,10 +1,20 @@
 # Oussama Ezitouni — Senior Full-Stack Engineer
 
-> Portfolio of Oussama Ezitouni, a Morocco-based (Kenitra / Rabat) senior
-> full-stack software engineer, DevOps architect, and technical lead with 3+
-> years building scalable web applications. Dual expertise across the JavaScript
-> (React, Next.js, Node.js, NestJS) and PHP (Symfony, Laravel) ecosystems.
-> Currently a Senior Software Engineer & Technical Lead at Intelcia Tech.
+> Oussama Ezitouni is a senior full-stack software engineer, DevOps architect,
+> and technical lead based in Rabat, Morocco. Since 2023 he has been a Senior
+> Software Engineer & Technical Lead at Intelcia Tech, where he owns platforms
+> end to end — architecture, data models, APIs, frontends, and CI/CD pipelines —
+> serving millions of users across 50+ institutions, with measured outcomes
+> including 40% faster page loads and capacity load-tested to 10× previous
+> traffic. He carries dual expertise across the JavaScript ecosystem (React,
+> Next.js, Node.js, NestJS) and the PHP ecosystem (Symfony, Laravel, PRADO),
+> plus applied data science (Python, Pandas, Scikit-learn). He also teaches an
+> international M.Sc. Computer Science cohort at Woolf University, ships
+> freelance web and mobile products such as the Nlivrilik logistics platform,
+> maintains the gotodev CLI on npm (100+ weekly downloads), and writes about
+> engineering on DEV.to.
+
+Updated: 2026-07-17
 
 Name variants, orderings, and common misspellings that refer to the same
 person: Oussama Ezitouni, Ezitouni Oussama, Zitouni Oussama, oussamaezitouni,
@@ -26,37 +36,48 @@ Languages: Arabic (native), English (C1), French (B2)
 
 ## Experience
 
-- [Experience timeline](https://oussama-ezitouni.com/#experience): Senior
-  Software Engineer & Technical Lead at Intelcia Tech, Rabat (2023–present) —
-  owns platforms end to end (architecture, data models, APIs, frontend,
-  CI/CD) serving millions of users across 50+ institutions; React / Next.js /
-  TypeScript frontends (40% perf gains, 10x traffic), PHP (Symfony, PRADO) +
-  Node.js (NestJS, Fastify) backends and microservices, mentors 5+ engineers.
-  Instructor for an international M.Sc. Computer Science program at Woolf
-  University (2023–2024) — software engineering, architecture, and thesis
-  supervision. Freelance full-stack engineer (2022–present) — 12+ web &
-  mobile apps including Nlivrilik (real-time last-mile logistics), Aksam
-  Assurance, Paylik, HoussniJob, Ibn Tofail University, Jadara Foundation.
-  Data Science Instructor at GoMyCode, Rabat (2023–2024). Speaker at internal
-  Intelcia engineering talks; hackathon mentor and jury; technical writer on
-  DEV.to since 2022.
+- [Senior Software Engineer & Technical Lead — Intelcia Tech, Rabat
+  (2023–present)](https://oussama-ezitouni.com/#experience): owns platforms
+  end to end (architecture, data models, APIs, frontend, CI/CD) serving
+  millions of users across 50+ institutions; React / Next.js / TypeScript
+  frontends 40% faster and load-tested to 10× previous traffic capacity; PHP
+  (Symfony, PRADO) and Node.js (NestJS, Fastify) backends modernized with
+  zero-downtime rollouts; mentors 5+ engineers.
+- [Instructor — International M.Sc. Computer Science, Woolf University
+  (2023–2024)](https://oussama-ezitouni.com/#experience): teaches software
+  engineering, architecture, and system design to an international master's
+  cohort; supervises student projects from first commit to defended thesis.
+- [Freelance Full-Stack Engineer (2022–present)](https://oussama-ezitouni.com/#experience):
+  12+ web & mobile products — [Nlivrilik](https://nlivrilik.ma) (real-time
+  last-mile logistics), Aksam Assurance (insurance), Paylik (fintech),
+  HoussniJob (recruitment), Ibn Tofail University (education); maintains
+  [gotodev on npm](https://www.npmjs.com/package/gotodev), 100+ weekly
+  downloads.
+- [Data Science Instructor — GoMyCode, Rabat (2023–2024)](https://oussama-ezitouni.com/#experience):
+  taught Python, Pandas, Scikit-learn, and predictive modeling to cohorts of
+  5–10 students.
+- Talks, writing & community (2022–present): internal engineering talks at
+  Intelcia, hackathon mentor and jury around Rabat, technical writer on
+  [DEV.to](https://dev.to/ezitounioussama), 120+ public GitHub repositories.
 - Affiliation: co-founder of [GoToDev](https://gotodev.ma), a Moroccan web &
   mobile development agency.
 
 ## Skills
 
 - [Tech stack](https://oussama-ezitouni.com/#stack): JavaScript (ES6+),
-  TypeScript, PHP, Python, SQL, Bash. Frontend: React 19, Next.js 15, Vue.js,
+  TypeScript, PHP, Python, SQL, Bash. Frontend: React 19, Next.js 16, Vue.js,
   Angular, Svelte 5, Tailwind CSS, GSAP. Backend: Node.js, Express, NestJS,
-  Fastify, Symfony, Laravel, REST, GraphQL, tRPC. Data: PostgreSQL, MySQL,
-  MongoDB, Redis, Elasticsearch. Data science: Pandas, NumPy, Scikit-learn,
-  TensorFlow. DevOps & Cloud: Docker, Kubernetes, GitHub Actions, GitLab CI,
-  Nginx, Terraform, AWS (EC2, S3, RDS), Prometheus, Grafana, Linux.
+  Fastify, Symfony, Laravel, PRADO, REST, GraphQL, tRPC. Data: PostgreSQL,
+  MySQL, MongoDB, Redis, Elasticsearch. Data science: Pandas, NumPy,
+  Scikit-learn, TensorFlow. DevOps & Cloud: Docker, Kubernetes, GitHub
+  Actions, GitLab CI, Nginx, Terraform, AWS (EC2, S3, RDS), Prometheus,
+  Grafana, Linux.
 
 ## Education & Certifications
 
 - M.Sc. Computer Science (Bac+5) — Woolf University, EU-accredited (in progress).
-- Licence MIAGE (Bac+3, European Bachelor) and DUT MIAGE (Bac+2).
+- Licence MIAGE (Bac+3, European Bachelor) and DUT MIAGE (Bac+2) — Université
+  Mohammed V, Rabat.
 - Certified JavaScript Developer (Orange); ALX Software Engineering & Data
   Science; Certified Hedera Blockchain Developer.
 
@@ -64,8 +85,14 @@ Languages: Arabic (native), English (C1), French (B2)
 
 - [Home](https://oussama-ezitouni.com/): single-page portfolio (Home,
   Experience, About, Stack, Contact)
+- [CV / Resume (PDF)](https://oussama-ezitouni.com/cv.pdf): downloadable resume
 - [GitHub](https://github.com/ezitounioussama): 120+ public repositories
 - [LinkedIn](https://www.linkedin.com/in/ezitounioussama): professional profile
+- [DEV.to](https://dev.to/ezitounioussama): technical writing since 2022
+- [X / Twitter](https://x.com/ezitounioussama): @ezitounioussama
+- [gotodev on npm](https://www.npmjs.com/package/gotodev): developer CLI,
+  100+ weekly downloads
+- [Nlivrilik](https://nlivrilik.ma): real-time logistics platform he built
 - [GoToDev](https://gotodev.ma): agency site
 - [Contact](https://oussama-ezitouni.com/#contact): contact form, or email
   ezitounioussama@gmail.com

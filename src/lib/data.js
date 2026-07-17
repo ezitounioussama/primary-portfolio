@@ -31,8 +31,13 @@ export const PROFILE = {
     site: "https://gotodev.ma",
     github: "https://github.com/ezitounioussama",
     linkedin: "https://www.linkedin.com/in/ezitounioussama",
+    devto: "https://dev.to/ezitounioussama",
+    twitter: "https://x.com/ezitounioussama",
+    npmPackage: "https://www.npmjs.com/package/gotodev",
     summary:
         "Senior full-stack engineer with 3+ years architecting and shipping scalable web applications across enterprise and startup ecosystems — dual expertise in the JavaScript and PHP worlds, plus DevOps and cloud-native infrastructure.",
+    shortSummary:
+        "Senior Full-Stack Engineer in Rabat, Morocco — React, Next.js, Node.js, PHP (Symfony, PRADO) and DevOps. 3+ years shipping platforms used by millions.",
 };
 
 // Root-relative anchors (/#x, not #x) so links work from any route (e.g. 404).
@@ -47,8 +52,9 @@ export const NAV_ITEMS = [
 
 // Skills summary (JSON-LD knowsAbout + About copy).
 export const STACK = [
+    "JavaScript",
     "React 19",
-    "Next.js 15",
+    "Next.js 16",
     "TypeScript",
     "Node.js",
     "NestJS",
@@ -173,8 +179,8 @@ export const TIMELINE = [
         org: "Intelcia Tech · Rabat",
         points: [
             "The engineer teams call when it matters — I own the platform end to end: architecture, data, APIs, frontend, pipelines. Millions of users, 50+ institutions.",
-            "Rebuilt enterprise frontends in React / Next.js / TypeScript — 40% faster loads and 10× the traffic headroom.",
-            "Modernized national-scale PHP (Symfony, PRADO) and Node.js (NestJS, Fastify) backends without a minute of downtime.",
+            "Rebuilt enterprise frontends in React / Next.js / TypeScript — 40% faster loads, load-tested to 10× the previous traffic capacity.",
+            "Modernized national-scale PHP (Symfony, PRADO) and Node.js (NestJS, Fastify) backends with zero-downtime, blue-green style rollouts.",
         ],
     },
     {
@@ -202,10 +208,17 @@ export const TIMELINE = [
         role: "Freelance Full-Stack Engineer",
         org: "Independent · Morocco",
         points: [
-            "Shipped 12+ web & mobile products across logistics, fintech, insurance, recruitment, and education.",
-            "Built Nlivrilik — real-time last-mile delivery with GPS tracking, driver routing, and multi-role dashboards (Next.js, Node.js, PostgreSQL).",
+            "Shipped 12+ web & mobile products: Nlivrilik (logistics), Aksam Assurance (insurance), Paylik (fintech), HoussniJob (recruitment), Ibn Tofail University (education).",
+            "Nlivrilik: real-time last-mile delivery with GPS tracking, driver routing, and multi-role dashboards (Next.js, Node.js, PostgreSQL).",
             "Every project is mine end to end: architecture, database, APIs, UI, deployment.",
-            "Maintain a developer toolkit and CLI with 100+ weekly npm downloads.",
+            "Maintain gotodev, a developer CLI with 100+ weekly npm downloads.",
+        ],
+        links: [
+            { label: "nlivrilik.ma", href: "https://nlivrilik.ma" },
+            {
+                label: "gotodev on npm",
+                href: "https://www.npmjs.com/package/gotodev",
+            },
         ],
     },
     {

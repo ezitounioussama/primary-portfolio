@@ -9,11 +9,17 @@ import "./globals.css";
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],
+    // 'optional': never swap late — a late font repaint of the hero H1
+    // re-records LCP seconds later on slow networks.
+    display: "optional",
 });
 
 const geistMono = Geist_Mono({
     variable: "--font-geist-mono",
     subsets: ["latin"],
+    display: "optional",
+    // Small-text font — keep it out of the critical preload graph.
+    preload: false,
 });
 
 const instrumentSerif = Instrument_Serif({
@@ -21,10 +27,12 @@ const instrumentSerif = Instrument_Serif({
     style: ["normal", "italic"],
     variable: "--font-instrument",
     subsets: ["latin"],
+    display: "optional",
+    preload: false,
 });
 
 const TITLE = `${PROFILE.name} — ${PROFILE.role}`;
-const DESCRIPTION = PROFILE.summary;
+const DESCRIPTION = PROFILE.shortSummary; // ≤160 chars for SERP snippets
 
 export const metadata = {
     metadataBase: new URL(SITE_URL),

@@ -5,9 +5,9 @@ export default function sitemap() {
     return [
         {
             url: SITE_URL,
-            lastModified: new Date(),
-            changeFrequency: "monthly",
-            priority: 1,
+            // Pin to the last real content change (build timestamps create
+            // phantom freshness signals). Update on substantive edits.
+            lastModified: new Date("2026-07-17"),
         },
     ];
 }

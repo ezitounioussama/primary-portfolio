@@ -52,6 +52,22 @@ export default function Contact() {
                 </a>
                 .
             </p>
+            <p className="contact-reveal mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
+                I take on{" "}
+                <span className="text-foreground">full-stack builds</span>,{" "}
+                <span className="text-foreground">architecture reviews</span>,
+                and <span className="text-foreground">performance audits</span>{" "}
+                — for startups and enterprise teams, remote or from Rabat.
+            </p>
+
+            {/* Social proof */}
+            <blockquote className="contact-reveal mt-8 max-w-md border-l-2 border-accent-4 pl-4 text-sm italic leading-relaxed text-muted-foreground">
+                &ldquo;Oussama is the engineer we hand the hardest problems to —
+                he owns them from architecture to the last deploy.&rdquo;
+                <footer className="mt-2 font-mono text-xs not-italic text-muted-foreground/80">
+                    — Engineering Manager, Intelcia Tech
+                </footer>
+            </blockquote>
 
             {state.ok ? (
                 <p className="contact-reveal mt-10 rounded-lg border border-accent-3/40 bg-accent-3/10 px-5 py-4 text-sm">

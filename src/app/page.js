@@ -17,21 +17,61 @@ const jsonLd = {
             alternateName: PROFILE.alternateNames,
             jobTitle: PROFILE.role,
             description: PROFILE.summary,
-            email: `mailto:${PROFILE.email}`,
+            // Bare address string per schema.org (no mailto: prefix).
+            email: PROFILE.email,
             url: SITE_URL,
-            image: `${SITE_URL}/opengraph-image`,
+            image: {
+                "@type": "ImageObject",
+                url: `${SITE_URL}/opengraph-image`,
+                width: 1200,
+                height: 630,
+                encodingFormat: "image/png",
+            },
             address: {
                 "@type": "PostalAddress",
-                addressLocality: "Kenitra / Rabat",
+                addressLocality: "Rabat",
                 addressCountry: "MA",
             },
-            sameAs: [PROFILE.github, PROFILE.linkedin, PROFILE.site],
+            nationality: {
+                "@type": "Country",
+                name: "Morocco",
+                identifier: "MA",
+            },
+            sameAs: [
+                PROFILE.github,
+                PROFILE.linkedin,
+                PROFILE.devto,
+                PROFILE.twitter,
+                PROFILE.site,
+            ],
             knowsAbout: STACK,
             worksFor: {
                 "@type": "Organization",
                 name: "Intelcia Tech",
-                location: "Rabat, Morocco",
+                url: "https://www.intelcia.com",
+                address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Rabat",
+                    addressCountry: "MA",
+                },
             },
+            alumniOf: [
+                {
+                    "@type": "CollegeOrUniversity",
+                    name: "Woolf University",
+                    url: "https://woolf.university",
+                },
+                {
+                    "@type": "CollegeOrUniversity",
+                    name: "Université Mohammed V",
+                    url: "https://www.um5.ac.ma",
+                    address: {
+                        "@type": "PostalAddress",
+                        addressLocality: "Rabat",
+                        addressCountry: "MA",
+                    },
+                },
+            ],
             // Kept in structured data only (not shown in the page UI).
             affiliation: {
                 "@type": "Organization",
@@ -55,6 +95,8 @@ const jsonLd = {
             name: `${PROFILE.name} — ${PROFILE.role}`,
             isPartOf: { "@id": `${SITE_URL}/#website` },
             about: { "@id": `${SITE_URL}/#person` },
+            datePublished: "2026-07-04",
+            dateModified: "2026-07-17",
         },
     ],
 };

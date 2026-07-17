@@ -64,28 +64,32 @@ export default function About() {
                 scrollTrigger: { trigger: rootRef.current, start: "top 70%" },
             });
 
-            // Stats count up once.
+            // Stats count up once. The SSR DOM carries the REAL values (so
+            // crawlers/no-JS readers never see zeros); the tween rewinds from
+            // 0 back to the target purely as progressive enhancement.
             const counters = gsap.utils.toArray(
                 ".about-count",
                 rootRef.current,
             );
-            for (const el of counters) {
-                const target = Number(el.dataset.value) || 0;
-                const state = { n: 0 };
-                gsap.to(state, {
-                    n: target,
-                    duration: reduced ? 0 : 1.6,
-                    ease: "power2.out",
-                    snap: { n: 1 },
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 85%",
-                        once: true,
-                    },
-                    onUpdate: () => {
-                        el.textContent = `${Math.round(state.n)}${el.dataset.suffix || ""}`;
-                    },
-                });
+            if (!reduced) {
+                for (const el of counters) {
+                    const target = Number(el.dataset.value) || 0;
+                    const state = { n: target };
+                    gsap.from(state, {
+                        n: 0,
+                        duration: 1.6,
+                        ease: "power2.out",
+                        snap: { n: 1 },
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 85%",
+                            once: true,
+                        },
+                        onUpdate: () => {
+                            el.textContent = `${Math.round(state.n)}${el.dataset.suffix || ""}`;
+                        },
+                    });
+                }
             }
 
             if (reduced) return;
@@ -246,6 +250,33 @@ export default function About() {
                             {PROFILE.email}
                         </a>
                     </div>
+
+                    {/* Verifiable proof + CV (crawlable external corroboration) */}
+                    <div className="about-rise mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-xs text-muted-foreground">
+                        <a
+                            href="/cv.pdf"
+                            download="Oussama-Ezitouni-CV.pdf"
+                            className="inline-block rounded-full border border-border bg-foreground/5 px-4 py-1.5 text-foreground transition-colors hover:border-accent-4 hover:text-accent-4"
+                        >
+                            Download CV ↓
+                        </a>
+                        <a
+                            href={PROFILE.devto}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-block py-1 underline underline-offset-4 transition-colors hover:text-foreground"
+                        >
+                            Writing on DEV.to
+                        </a>
+                        <a
+                            href={PROFILE.npmPackage}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-block py-1 underline underline-offset-4 transition-colors hover:text-foreground"
+                        >
+                            gotodev on npm
+                        </a>
+                    </div>
                 </div>
 
                 {/* Holographic portrait card (px keeps orbit chips inside the viewport) */}
@@ -315,12 +346,14 @@ export default function About() {
             <dl className="mt-20 grid grid-cols-2 gap-6 border-y border-border py-10 md:grid-cols-4">
                 {ABOUT.stats.map((s) => (
                     <div key={s.label} className="text-center">
+                        {/* SSR the real value — crawlers/no-JS must never see zeros */}
                         <dd
                             className="about-count text-4xl font-semibold tracking-tight md:text-5xl"
                             data-value={s.value}
                             data-suffix={s.suffix}
                         >
-                            0{s.suffix}
+                            {s.value}
+                            {s.suffix}
                         </dd>
                         <dt className="mt-2 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
                             {s.label}
