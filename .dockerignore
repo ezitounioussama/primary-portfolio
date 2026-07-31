@@ -1,0 +1,27 @@
+# Dependencies / build output (rebuilt inside the image)
+node_modules
+.next
+out
+
+# VCS / editor
+.git
+.gitignore
+.vscode
+.idea
+
+# Env files (pass real values via build args / runtime env)
+.env*
+
+# Docs & repo-only artifacts — not needed to build the app
+AGENTS.md
+CLAUDE.md
+README.md
+linkedin-post.md
+linkedin-hero.png
+seo-report
+screenshots
+
+# Docker itself
+Dockerfile
+.dockerignore
+compose.yaml

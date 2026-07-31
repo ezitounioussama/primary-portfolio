@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    // Self-contained server bundle for Docker (.next/standalone + server.js).
+    output: "standalone",
     // Don't advertise the framework (fingerprinting).
     poweredByHeader: false,
     // Security headers at the app layer so they hold on any host.
