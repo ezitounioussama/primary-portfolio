@@ -41,6 +41,11 @@ bun run lint         # biome check
 bun run format       # biome format --write
 bunx --bun shadcn@latest add <component>     # shadcn/ui
 bunx --bun shadcn@latest add @magicui/<c>    # Magic UI
+
+# Docker (multi-stage: oven/bun builder → node:24-slim runner, standalone output)
+docker compose up --build             # build + run on :3000
+docker build -t oussama-portfolio .   # NEXT_PUBLIC_SITE_URL is a build ARG —
+                                      # pass --build-arg for a different domain
 ```
 
 ## Project layout
