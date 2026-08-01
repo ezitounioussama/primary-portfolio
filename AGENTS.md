@@ -43,7 +43,7 @@ bunx --bun shadcn@latest add <component>     # shadcn/ui
 bunx --bun shadcn@latest add @magicui/<c>    # Magic UI
 
 # Docker (multi-stage: oven/bun builder → node:24-slim runner, standalone output)
-docker compose up --build             # build + run on :3000
+docker compose up --build             # app on :3000 + Ollama sidecar (auto-pulls qwen2.5:0.5b)
 docker build -t oussama-portfolio .   # NEXT_PUBLIC_SITE_URL is a build ARG —
                                       # pass --build-arg for a different domain
 ```
@@ -56,6 +56,7 @@ src/
     layout.js              # root layout — metadata + viewport, fonts, theme init, chrome
     page.js                # home — section composition + JSON-LD structured data
     actions.js             # "use server" — submitContact Server Action
+    api/chat/route.js      # streaming chat proxy → Ollama (OLLAMA_URL/OLLAMA_MODEL env)
     globals.css            # Tailwind v4 + shadcn tokens (@theme) + accent-1..5 + Lenis baseline
     favicon.ico            # site icon (from gotodev.ma)
     opengraph-image.js     # dynamic OG/Twitter card (next/og ImageResponse, 1200x630)
@@ -68,6 +69,7 @@ src/
     smooth-scroll.jsx        # Lenis ↔ GSAP ticker ↔ ScrollTrigger provider (client)
     not-found-scene.jsx      # 404 scene — hero-style orb + parallax + "Back home" CTA (CTA stays out of GSAP fades)
     nav/floating-dock.jsx    # magnify-on-hover dock (GSAP quickTo)
+    chat/assistant-widget.jsx # bottom-right AI chat — streams /api/chat (qwen2.5:0.5b via Ollama)
     hero/parallax-hero.jsx   # 3D mouse-parallax holographic orb + editorial chrome
     transitions/curve.jsx    # velocity-reactive bezier divider between sections
     experience/timeline.jsx  # Aceternity Timeline (scroll-beam) ported to GSAP + particle-globe backdrop
