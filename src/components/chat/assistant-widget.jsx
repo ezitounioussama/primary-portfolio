@@ -14,7 +14,7 @@ const IRIDESCENT =
 const GREETING = {
     role: "assistant",
     content:
-        "Hi! I'm Oussama's portfolio assistant — a tiny local model running in a container next to this site. Ask me about his experience, stack, or how to get in touch.",
+        "Hi! I'm Oussama's portfolio assistant. feel free to ask",
 };
 
 /**

@@ -59,7 +59,7 @@ export async function POST(request) {
                     ...messages,
                 ],
                 options: {
-                    temperature: 0.5,
+                    temperature: 0.1,
                     num_predict: 220,
                 },
             }),
